@@ -71,6 +71,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\ParkingStatistics.cs" />
+    <Compile Include="RabbitMQ\Receiver\UserMessage.cs" />
     <Compile Include="Service1.svc.cs">
       <DependentUpon>Service1.svc</DependentUpon>
     </Compile>
@@ -78,7 +80,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="RabbitMQ\Receiver\" />
     <Folder Include="RabbitMQ\Sender\" />
   </ItemGroup>
   <ItemGroup>
