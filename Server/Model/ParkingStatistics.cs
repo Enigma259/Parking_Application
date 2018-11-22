@@ -10,9 +10,16 @@ namespace Server.Model
     /// </summary>
     public class ParkingStatistics
     {
+        //parking service request number.
         private int psr_number;
+
+        //average amount of parking service request.
         private double psr_average;
+
+        //list of parking service request numbers
         private List<int> psr_numbers;
+
+        //last update of psr_average.
         private DateTime last_update;
         private static volatile ParkingStatistics _instance;
         private static object syncRoot = new object();
@@ -76,6 +83,15 @@ namespace Server.Model
         }
 
         /// <summary>
+        /// This method returns the values in the list last_update.
+        /// </summary>
+        /// <returns>last_update</returns>
+        public DateTime GetLastUpdate()
+        {
+            return last_update;
+        }
+
+        /// <summary>
         /// This method changes the value of the instance psr_number.
         /// </summary>
         /// <param name="reset"></param>
@@ -131,6 +147,11 @@ namespace Server.Model
             }
         }
 
+        public void SetLastUpdate()
+        {
+            this.last_update = DateTime.Now;
+        }
+
         /// <summary>
         /// This method adds a new value to the list psr_numbers.
         /// </summary>
@@ -146,9 +167,195 @@ namespace Server.Model
             }
         }
 
+        /// <summary>
+        /// This method increases the psr_number and if there has gone a minute or more it will update the psr_average.
+        /// </summary>
         public void PSRNumberIncrease()
         {
+            DateTime now = DateTime.Now;
+            int seconds = 60;
+            
+            if(now.Year == GetLastUpdate().Year)
+            {
+                if (now.Month == GetLastUpdate().Month)
+                {
+                    if (now.Day == GetLastUpdate().Day)
+                    {
+                        if (now.Hour == GetLastUpdate().Hour)
+                        {
+                            if (now.Minute > GetLastUpdate().Minute)
+                            {
+                                SetPSRAverage(seconds);
+                            }
 
+                            //if the minutes now isn't higher than the last update minute.
+                            else
+                            {
+                                SetPSRNumber(false);
+                            }
+                        }
+
+                        //if the two instances hour aren't equal.
+                        else
+                        {
+                            if(now.Hour - GetLastUpdate().Hour == 1)
+                            {
+                                if (now.Minute > GetLastUpdate().Minute)
+                                {
+                                    SetPSRAverage(seconds);
+                                }
+
+                                //if the minutes now isn't higher than the last update minute.
+                                else
+                                {
+                                    SetPSRNumber(false);
+                                }
+                            }
+
+                            else
+                            {
+                                SetPSRNumber(false);
+                            }
+                        }
+                    }
+
+                    //if the two instances days aren't equal.
+                    else
+                    {
+                        if (now.Day - GetLastUpdate().Day == 1)
+                        {
+                            if (now.Hour - GetLastUpdate().Hour == 1)
+                            {
+                                if (now.Minute > GetLastUpdate().Minute)
+                                {
+                                    SetPSRAverage(seconds);
+                                }
+
+                                //if the minutes now isn't higher than the last update minute.
+                                else
+                                {
+                                    SetPSRNumber(false);
+                                }
+                            }
+
+                            else
+                            {
+                                SetPSRNumber(false);
+                            }
+                        }
+
+                        else
+                        {
+                            SetPSRNumber(false);
+                        }
+                    }
+                }
+
+                //if the two instances months aren't equal.
+                else
+                {
+                    if (now.Month - GetLastUpdate().Month == 1)
+                    {
+                        if (now.Day - GetLastUpdate().Day == 1)
+                        {
+                            if (now.Hour - GetLastUpdate().Hour == 1)
+                            {
+                                if (now.Minute > GetLastUpdate().Minute)
+                                {
+                                    SetPSRAverage(seconds);
+                                }
+
+                                //if the minutes now isn't higher than the last update minute.
+                                else
+                                {
+                                    SetPSRNumber(false);
+                                }
+                            }
+
+                            else
+                            {
+                                SetPSRNumber(false);
+                            }
+                        }
+
+                        else
+                        {
+                            SetPSRNumber(false);
+                        }
+                    }
+
+                    else
+                    {
+                        SetPSRNumber(false);
+                    }
+                }
+            }
+
+            //if the two instances years aren't equal.
+            else
+            {
+                if (now.Year - GetLastUpdate().Year == 1)
+                {
+                    if (now.Month - GetLastUpdate().Month == 1)
+                    {
+                        if (now.Day - GetLastUpdate().Day == 1)
+                        {
+                            if (now.Hour - GetLastUpdate().Hour == 1)
+                            {
+                                if (now.Minute > GetLastUpdate().Minute)
+                                {
+                                    SetPSRAverage(seconds);
+                                }
+
+                                //if the minutes now isn't higher than the last update minute.
+                                else
+                                {
+                                    SetPSRNumber(false);
+                                }
+                            }
+
+                            else
+                            {
+                                SetPSRNumber(false);
+                            }
+                        }
+
+                        else
+                        {
+                            SetPSRNumber(false);
+                        }
+                    }
+
+                    else
+                    {
+                        SetPSRNumber(false);
+                    }
+                }
+
+                else
+                {
+                    SetPSRNumber(false);
+                }
+            }
+
+            SetLastUpdate();
+        }
+
+        /// <summary>
+        /// This method calculates the total psr_number and return the result.
+        /// </summary>
+        /// <returns></returns>
+        public int GetTotalPSRNumber()
+        {
+            int result = 0;
+            List<int> psrs = GetPSRNumbers();
+
+            foreach(int number in psrs)
+            {
+                result += number;
+            }
+
+            return result;
         }
     }
 }
