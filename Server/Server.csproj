@@ -48,6 +48,7 @@
     <Reference Include="RabbitMQ.Client, Version=5.0.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
       <HintPath>..\packages\RabbitMQ.Client.5.1.0\lib\net451\RabbitMQ.Client.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Device" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -72,8 +73,14 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\SQL_Database.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SQL_Database.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Model\Commercial.cs" />
     <Compile Include="Model\Location.cs" />
+    <Compile Include="Model\Parking.cs" />
     <Compile Include="Model\ParkingStatistics.cs" />
     <Compile Include="RabbitMQ\Receiver\UserMessage.cs" />
     <Compile Include="Service1.svc.cs">
@@ -86,12 +93,25 @@
     <Folder Include="RabbitMQ\Sender\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Database\SQL_Database.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>SQL_Database.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Database\SQL_Database.dbml.layout">
+      <DependentUpon>SQL_Database.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="SQL_Database">
+  <DataContextMoniker Name="/SQL_DatabaseDataContext" />
+  <nestedChildShapes>
+    <classShape Id="5012cd37-c327-46bf-868a-56e70aa5481d" absoluteBounds="0.75, 0.875, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/SQL_DatabaseDataContext/TableParkingPlace" />
+      <nestedChildShapes>
+        <elementListCompartment Id="26613b5a-f496-4d43-a273-36925169ff0b" absoluteBounds="0.765, 1.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ecab503e-8de0-4e0f-b105-5c71c881bac9" absoluteBounds="3.5, 1.125, 2, 1.7708968098958329">
+      <DataClassMoniker Name="/SQL_DatabaseDataContext/TableReservation" />
+      <nestedChildShapes>
+        <elementListCompartment Id="47db4b14-3513-4139-bb62-610d4bdde138" absoluteBounds="3.515, 1.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 2.01044840494792); (3.5 : 2.01044840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/SQL_DatabaseDataContext/TableParkingPlace/TableParkingPlace_TableReservation" />
+      <nodes>
+        <classShapeMoniker Id="5012cd37-c327-46bf-868a-56e70aa5481d" />
+        <classShapeMoniker Id="ecab503e-8de0-4e0f-b105-5c71c881bac9" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
