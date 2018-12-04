@@ -9,6 +9,8 @@
       <Column Name="parking_name" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="spaces" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="vacant" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="city" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="country" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
       <Association Name="TableParkingPlace_TableReservation" Member="TableReservation" ThisKey="id" OtherKey="id" Type="TableReservation" Cardinality="One" />
     </Type>
   </Table>

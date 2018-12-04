@@ -105,6 +105,10 @@ namespace Server.Database
 		
 		private int _vacant;
 		
+		private string _city;
+		
+		private string _country;
+		
 		private EntityRef<TableReservation> _TableReservation;
 		
     #region Extensibility Method Definitions
@@ -125,6 +129,10 @@ namespace Server.Database
     partial void OnspacesChanged();
     partial void OnvacantChanging(int value);
     partial void OnvacantChanged();
+    partial void OncityChanging(string value);
+    partial void OncityChanged();
+    partial void OncountryChanging(string value);
+    partial void OncountryChanged();
     #endregion
 		
 		public TableParkingPlace()
@@ -269,6 +277,46 @@ namespace Server.Database
 					this._vacant = value;
 					this.SendPropertyChanged("vacant");
 					this.OnvacantChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_city", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string city
+		{
+			get
+			{
+				return this._city;
+			}
+			set
+			{
+				if ((this._city != value))
+				{
+					this.OncityChanging(value);
+					this.SendPropertyChanging();
+					this._city = value;
+					this.SendPropertyChanged("city");
+					this.OncityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_country", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string country
+		{
+			get
+			{
+				return this._country;
+			}
+			set
+			{
+				if ((this._country != value))
+				{
+					this.OncountryChanging(value);
+					this.SendPropertyChanging();
+					this._country = value;
+					this.SendPropertyChanged("country");
+					this.OncountryChanged();
 				}
 			}
 		}
