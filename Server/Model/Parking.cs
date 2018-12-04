@@ -40,7 +40,7 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// 
+        /// This method creates a parking place in the SQL database.
         /// </summary>
         /// <param name="longtitude"></param>
         /// <param name="latitude"></param>
@@ -93,7 +93,7 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// 
+        /// This method list all the parking places from the SQL database.
         /// </summary>
         /// <returns></returns>
         public List<TableParkingPlace> ListAllParkings()
@@ -116,7 +116,7 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// 
+        /// This method finds a parking place in the SQL database by its id.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -139,7 +139,7 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// 
+        /// This method finds a list of parking places in the SQL database by its location.
         /// </summary>
         /// <param name="longtitude"></param>
         /// <param name="latitude"></param>
@@ -163,9 +163,9 @@ namespace Server.Model
 
             return parking_places;
         }
-        
+
         /// <summary>
-        /// 
+        /// This method finds a list of parking places in the SQL database by its parking_name.
         /// </summary>
         /// <param name="parking_name"></param>
         /// <returns></returns>
@@ -189,7 +189,7 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// 
+        /// This method finds a list of parking places in the SQL database by its spaces.
         /// </summary>
         /// <param name="spaces"></param>
         /// <returns></returns>
@@ -213,7 +213,7 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// 
+        /// This method finds a list of parking places in the SQL database by its spaces.
         /// </summary>
         /// <param name="spaces"></param>
         /// <returns></returns>
@@ -235,9 +235,9 @@ namespace Server.Model
 
             return parking_places;
         }
-        
+
         /// <summary>
-        /// 
+        /// This method finds a list of parking places in the SQL database by its spaces.
         /// </summary>
         /// <param name="spaces"></param>
         /// <returns></returns>
@@ -261,7 +261,7 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// 
+        /// This method finds a list of parking places in the SQL database by its vacant.
         /// </summary>
         /// <param name="vacant"></param>
         /// <returns></returns>
@@ -285,7 +285,7 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// 
+        /// This method finds a list of parking places in the SQL database by its vacant.
         /// </summary>
         /// <param name="vacant"></param>
         /// <returns></returns>
@@ -309,7 +309,7 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// 
+        /// This method finds a list of parking places in the SQL database by its vacant.
         /// </summary>
         /// <param name="vacant"></param>
         /// <returns></returns>
@@ -333,7 +333,7 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// 
+        /// This method finds a list of parking places in the SQL database by its city.
         /// </summary>
         /// <param name="city"></param>
         /// <returns></returns>
@@ -357,7 +357,7 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// 
+        /// This method finds a list of parking places in the SQL database by its country.
         /// </summary>
         /// <param name="country"></param>
         /// <returns></returns>
@@ -381,7 +381,7 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// 
+        /// This method updates a parking place in the SQL database.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="longtitude"></param>
@@ -395,7 +395,7 @@ namespace Server.Model
         /// <returns></returns>
         public string UpdateParking(int id, double longtitude, double latitude, double altitude, string parking_name, int spaces, int vacant, string city, string country)
         {
-            string result;
+            string result = "";
             bool change = false;
             var parking_place = from pp in db.TableParkingPlaces where pp.id == id  select pp;
 
@@ -476,7 +476,7 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// 
+        /// This method deletes a parking place from the SQL database.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
