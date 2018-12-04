@@ -98,20 +98,21 @@ namespace Server.Model
         /// <returns></returns>
         public List<TableParkingPlace> ListAllParkings()
         {
-            List<TableParkingPlace> administrations;
+            List<TableParkingPlace> parking_places;
 
             try
             {
-                var list = from a in db.TableParkingPlaces select a;
-                administrations = list.ToList<TableParkingPlace>();
+                var list = from pp in db.TableParkingPlaces select pp;
+                parking_places = list.ToList<TableParkingPlace>();
             }
 
             catch (Exception exception)
             {
-                administrations = new List<TableParkingPlace>();
+                parking_places = new List<TableParkingPlace>();
+                Console.WriteLine(exception.Message);
             }
 
-            return administrations;
+            return parking_places;
         }
 
         /// <summary>
@@ -121,7 +122,20 @@ namespace Server.Model
         /// <returns></returns>
         public TableParkingPlace FindParkingByid(int id)
         {
+            TableParkingPlace parking_place;
 
+            try
+            {
+                parking_place = db.TableParkingPlaces.First(pp => pp.id == id);
+            }
+
+            catch (Exception exception)
+            {
+                parking_place = new TableParkingPlace();
+                Console.WriteLine(exception.Message);
+            }
+
+            return parking_place;
         }
 
         /// <summary>
@@ -133,7 +147,21 @@ namespace Server.Model
         /// <returns></returns>
         public List<TableParkingPlace> FindParkingByLocation(double longtitude, double latitude, double altitude)
         {
+            List<TableParkingPlace> parking_places;
 
+            try
+            {
+                var list = from pp in db.TableParkingPlaces where pp.longtitude == longtitude && pp.latitude == latitude && pp.altitude == altitude select pp;
+                parking_places = list.ToList();
+            }
+
+            catch (Exception exception)
+            {
+                parking_places = new List<TableParkingPlace>();
+                Console.WriteLine(exception.Message);
+            }
+
+            return parking_places;
         }
         
         /// <summary>
@@ -143,7 +171,21 @@ namespace Server.Model
         /// <returns></returns>
         public List<TableParkingPlace> FindParkingByParkingName(string parking_name)
         {
+            List<TableParkingPlace> parking_places;
 
+            try
+            {
+                var list = from pp in db.TableParkingPlaces where pp.parking_name.Contains(parking_name) select pp;
+                parking_places = list.ToList();
+            }
+
+            catch (Exception exception)
+            {
+                parking_places = new List<TableParkingPlace>();
+                Console.WriteLine(exception.Message);
+            }
+
+            return parking_places;
         }
 
         /// <summary>
@@ -153,7 +195,21 @@ namespace Server.Model
         /// <returns></returns>
         public List<TableParkingPlace> FindParkingBySpaces(int spaces)
         {
+            List<TableParkingPlace> parking_places;
 
+            try
+            {
+                var list = from pp in db.TableParkingPlaces where pp.spaces == spaces select pp;
+                parking_places = list.ToList();
+            }
+
+            catch (Exception exception)
+            {
+                parking_places = new List<TableParkingPlace>();
+                Console.WriteLine(exception.Message);
+            }
+
+            return parking_places;
         }
 
         /// <summary>
@@ -163,7 +219,21 @@ namespace Server.Model
         /// <returns></returns>
         public List<TableParkingPlace> FindParkingBySpacesHigher(int spaces)
         {
+            List<TableParkingPlace> parking_places;
 
+            try
+            {
+                var list = from pp in db.TableParkingPlaces where pp.spaces > spaces select pp;
+                parking_places = list.ToList();
+            }
+
+            catch (Exception exception)
+            {
+                parking_places = new List<TableParkingPlace>();
+                Console.WriteLine(exception.Message);
+            }
+
+            return parking_places;
         }
         
         /// <summary>
@@ -173,7 +243,21 @@ namespace Server.Model
         /// <returns></returns>
         public List<TableParkingPlace> FindParkingBySpacesLower(int spaces)
         {
+            List<TableParkingPlace> parking_places;
 
+            try
+            {
+                var list = from pp in db.TableParkingPlaces where pp.spaces < spaces select pp;
+                parking_places = list.ToList();
+            }
+
+            catch (Exception exception)
+            {
+                parking_places = new List<TableParkingPlace>();
+                Console.WriteLine(exception.Message);
+            }
+
+            return parking_places;
         }
 
         /// <summary>
@@ -183,7 +267,21 @@ namespace Server.Model
         /// <returns></returns>
         public List<TableParkingPlace> FindParkingByVacant(int vacant)
         {
+            List<TableParkingPlace> parking_places;
 
+            try
+            {
+                var list = from pp in db.TableParkingPlaces where pp.vacant == vacant select pp;
+                parking_places = list.ToList();
+            }
+
+            catch (Exception exception)
+            {
+                parking_places = new List<TableParkingPlace>();
+                Console.WriteLine(exception.Message);
+            }
+
+            return parking_places;
         }
 
         /// <summary>
@@ -193,7 +291,21 @@ namespace Server.Model
         /// <returns></returns>
         public List<TableParkingPlace> FindParkingByVacantHigher(int vacant)
         {
+            List<TableParkingPlace> parking_places;
 
+            try
+            {
+                var list = from pp in db.TableParkingPlaces where pp.vacant > vacant select pp;
+                parking_places = list.ToList();
+            }
+
+            catch (Exception exception)
+            {
+                parking_places = new List<TableParkingPlace>();
+                Console.WriteLine(exception.Message);
+            }
+
+            return parking_places;
         }
 
         /// <summary>
@@ -203,7 +315,21 @@ namespace Server.Model
         /// <returns></returns>
         public List<TableParkingPlace> FindParkingByVacantLower(int vacant)
         {
+            List<TableParkingPlace> parking_places;
 
+            try
+            {
+                var list = from pp in db.TableParkingPlaces where pp.vacant < vacant select pp;
+                parking_places = list.ToList();
+            }
+
+            catch (Exception exception)
+            {
+                parking_places = new List<TableParkingPlace>();
+                Console.WriteLine(exception.Message);
+            }
+
+            return parking_places;
         }
 
         /// <summary>
@@ -213,7 +339,21 @@ namespace Server.Model
         /// <returns></returns>
         public List<TableParkingPlace> FindParkingByCity(string city)
         {
+            List<TableParkingPlace> parking_places;
 
+            try
+            {
+                var list = from pp in db.TableParkingPlaces where pp.city.Contains(city) select pp;
+                parking_places = list.ToList();
+            }
+
+            catch (Exception exception)
+            {
+                parking_places = new List<TableParkingPlace>();
+                Console.WriteLine(exception.Message);
+            }
+
+            return parking_places;
         }
 
         /// <summary>
@@ -223,7 +363,21 @@ namespace Server.Model
         /// <returns></returns>
         public List<TableParkingPlace> FindParkingByCountry(string country)
         {
+            List<TableParkingPlace> parking_places;
 
+            try
+            {
+                var list = from pp in db.TableParkingPlaces where pp.country.Contains(country) select pp;
+                parking_places = list.ToList();
+            }
+
+            catch (Exception exception)
+            {
+                parking_places = new List<TableParkingPlace>();
+                Console.WriteLine(exception.Message);
+            }
+
+            return parking_places;
         }
 
         /// <summary>
@@ -241,7 +395,84 @@ namespace Server.Model
         /// <returns></returns>
         public string UpdateParking(int id, double longtitude, double latitude, double altitude, string parking_name, int spaces, int vacant, string city, string country)
         {
+            string result;
+            bool change = false;
+            var parking_place = from pp in db.TableParkingPlaces where pp.id == id  select pp;
 
+            foreach (TableParkingPlace pp in parking_place)
+            {
+                if (pp.longtitude != longtitude)
+                {
+                    change = true;
+                    pp.longtitude = longtitude;
+                }
+
+                if (pp.latitude != latitude)
+                {
+                    change = true;
+                    pp.latitude = latitude;
+                }
+
+                if (pp.altitude != altitude)
+                {
+                    change = true;
+                    pp.altitude = altitude;
+                }
+
+                if (pp.parking_name != parking_name)
+                {
+                    change = true;
+                    pp.parking_name = parking_name;
+                }
+
+                if (pp.spaces != spaces)
+                {
+                    change = true;
+                    pp.spaces = spaces;
+                }
+
+                if (pp.vacant != vacant)
+                {
+                    change = true;
+                    if (vacant > spaces)
+                    {
+                        pp.vacant = spaces;
+                    }
+
+                    else
+                    {
+                        pp.vacant = vacant;
+                    }
+                }
+
+                if (pp.city != city)
+                {
+                    change = true;
+                    pp.city = city;
+                }
+
+                if (pp.country != country)
+                {
+                    change = true;
+                    pp.country = country;
+                }
+
+                if(change.Equals(true))
+                {
+                    try
+                    {
+                        db.SubmitChanges();
+                        result = "Success";
+                    }
+                    catch (Exception exception)
+                    {
+                        Console.WriteLine(exception.Message);
+                        result = exception.Message;
+                    }
+                }
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -251,7 +482,30 @@ namespace Server.Model
         /// <returns></returns>
         public string DeleteParking(int id)
         {
+            string result;
+            TableParkingPlace parking_place = FindParkingByid(id);
 
+            try
+            {
+                if (parking_place.id >= 1)
+                {
+                    db.TableParkingPlaces.DeleteOnSubmit(parking_place);
+                    db.SubmitChanges();
+                    result = "Success";
+                }
+
+                else
+                {
+                    result = "Could not find the parking space";
+                }
+            }
+
+            catch(Exception exception)
+            {
+                result = exception.Message;
+            }
+
+            return result;
         }
     }
 }
