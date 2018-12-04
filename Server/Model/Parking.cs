@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Server.Database;
+using System;
 using System.Collections.Generic;
-using Server.Database;
 
 namespace Server.Model
 {
@@ -68,7 +68,7 @@ namespace Server.Model
                 parking_place.vacant = spaces;
             }
 
-           else
+            else
             {
                 parking_place.vacant = vacant;
             }
@@ -84,7 +84,7 @@ namespace Server.Model
                 result = "Success";
             }
 
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 result = "ERROR: " + exception.Message;
             }
@@ -162,6 +162,80 @@ namespace Server.Model
             }
 
             return parking_places;
+        }
+
+        /// <summary>
+        /// This method finds the closest parking place.
+        /// </summary>
+        /// <param name="city"></param>
+        /// <param name="country"></param>
+        /// <param name="longtitude"></param>
+        /// <param name="latitude"></param>
+        /// <returns></returns>
+        public TableParkingPlace FindNearestParking(string city, string country, double longtitude, double latitude)
+        {
+            List<TableParkingPlace> parking_places;
+            TableParkingPlace current_parking;
+            int index;
+            double current_distance;
+            double shortest_distance;
+
+            try
+            {
+                var list = from pp in db.TableParkingPlaces where pp.country == country select pp;
+                parking_places = list.ToList();
+
+                if (city != null && city != "")
+                {
+                    index = 0;
+
+                    while (index < parking_places.Count)
+                    {
+                        current_parking = parking_places[index];
+
+                        if (current_parking.city.Equals(city))
+                        {
+                            parking_places.Remove(current_parking);
+                        }
+
+                        else
+                        {
+                            index++;
+                        }
+                    }
+                }
+
+                index = 0;
+                current_parking = null;
+                shortest_distance = 0.0;
+                foreach(TableParkingPlace parking_place in parking_places)
+                {
+                    if(index == 0)
+                    {
+                        current_parking = parking_place;
+                        shortest_distance = Math.Sqrt((current_parking.longtitude * current_parking.longtitude) + (current_parking.latitude * current_parking.latitude));
+                        index++;
+                    }
+
+                    else
+                    {
+                        current_distance = Math.Sqrt((current_parking.longtitude * current_parking.longtitude) + (current_parking.latitude * current_parking.latitude));
+
+                        if(current_distance < shortest_distance)
+                        {
+                            current_parking = parking_place;
+                        }
+                    }
+                }
+            }
+
+            catch(Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+                current_parking = new TableParkingPlace();
+            }
+
+            return current_parking;
         }
 
         /// <summary>
@@ -397,7 +471,7 @@ namespace Server.Model
         {
             string result = "";
             bool change = false;
-            var parking_place = from pp in db.TableParkingPlaces where pp.id == id  select pp;
+            var parking_place = from pp in db.TableParkingPlaces where pp.id == id select pp;
 
             foreach (TableParkingPlace pp in parking_place)
             {
@@ -457,7 +531,7 @@ namespace Server.Model
                     pp.country = country;
                 }
 
-                if(change.Equals(true))
+                if (change.Equals(true))
                 {
                     try
                     {
@@ -500,7 +574,7 @@ namespace Server.Model
                 }
             }
 
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 result = exception.Message;
             }
