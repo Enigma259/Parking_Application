@@ -50,7 +50,7 @@ namespace Server.Model
         /// <param name="vacant"></param>
         /// <param name="city"></param>
         /// <param name="country"></param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public string CreateParking(double longtitude, double latitude, double altitude, string parking_name, int spaces, int vacant, string city, string country)
         {
             string result;
@@ -95,7 +95,7 @@ namespace Server.Model
         /// <summary>
         /// This method list all the parking places from the SQL database.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List<TableParkingPlace></returns>
         public List<TableParkingPlace> ListAllParkings()
         {
             List<TableParkingPlace> parking_places;
@@ -119,7 +119,7 @@ namespace Server.Model
         /// This method finds a parking place in the SQL database by its id.
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>TableParkingPlace</returns>
         public TableParkingPlace FindParkingByid(int id)
         {
             TableParkingPlace parking_place;
@@ -144,7 +144,7 @@ namespace Server.Model
         /// <param name="longtitude"></param>
         /// <param name="latitude"></param>
         /// <param name="altitude"></param>
-        /// <returns></returns>
+        /// <returns>List<TableParkingPlace></returns>
         public List<TableParkingPlace> FindParkingByLocation(double longtitude, double latitude, double altitude)
         {
             List<TableParkingPlace> parking_places;
@@ -171,7 +171,7 @@ namespace Server.Model
         /// <param name="country"></param>
         /// <param name="longtitude"></param>
         /// <param name="latitude"></param>
-        /// <returns></returns>
+        /// <returns>TableParkingPlace</returns>
         public TableParkingPlace FindNearestParking(string city, string country, double longtitude, double latitude)
         {
             List<TableParkingPlace> parking_places;
@@ -242,7 +242,7 @@ namespace Server.Model
         /// This method finds a list of parking places in the SQL database by its parking_name.
         /// </summary>
         /// <param name="parking_name"></param>
-        /// <returns></returns>
+        /// <returns>List<TableParkingPlace></returns>
         public List<TableParkingPlace> FindParkingByParkingName(string parking_name)
         {
             List<TableParkingPlace> parking_places;
@@ -266,7 +266,7 @@ namespace Server.Model
         /// This method finds a list of parking places in the SQL database by its spaces.
         /// </summary>
         /// <param name="spaces"></param>
-        /// <returns></returns>
+        /// <returns>List<TableParkingPlace></returns>
         public List<TableParkingPlace> FindParkingBySpaces(int spaces)
         {
             List<TableParkingPlace> parking_places;
@@ -290,7 +290,7 @@ namespace Server.Model
         /// This method finds a list of parking places in the SQL database by its spaces.
         /// </summary>
         /// <param name="spaces"></param>
-        /// <returns></returns>
+        /// <returns>List<TableParkingPlace></returns>
         public List<TableParkingPlace> FindParkingBySpacesHigher(int spaces)
         {
             List<TableParkingPlace> parking_places;
@@ -314,7 +314,7 @@ namespace Server.Model
         /// This method finds a list of parking places in the SQL database by its spaces.
         /// </summary>
         /// <param name="spaces"></param>
-        /// <returns></returns>
+        /// <returns>List<TableParkingPlace></returns>
         public List<TableParkingPlace> FindParkingBySpacesLower(int spaces)
         {
             List<TableParkingPlace> parking_places;
@@ -338,7 +338,7 @@ namespace Server.Model
         /// This method finds a list of parking places in the SQL database by its vacant.
         /// </summary>
         /// <param name="vacant"></param>
-        /// <returns></returns>
+        /// <returns>List<TableParkingPlace></returns>
         public List<TableParkingPlace> FindParkingByVacant(int vacant)
         {
             List<TableParkingPlace> parking_places;
@@ -362,7 +362,7 @@ namespace Server.Model
         /// This method finds a list of parking places in the SQL database by its vacant.
         /// </summary>
         /// <param name="vacant"></param>
-        /// <returns></returns>
+        /// <returns>List<TableParkingPlace></returns>
         public List<TableParkingPlace> FindParkingByVacantHigher(int vacant)
         {
             List<TableParkingPlace> parking_places;
@@ -386,7 +386,7 @@ namespace Server.Model
         /// This method finds a list of parking places in the SQL database by its vacant.
         /// </summary>
         /// <param name="vacant"></param>
-        /// <returns></returns>
+        /// <returns>List<TableParkingPlace></returns>
         public List<TableParkingPlace> FindParkingByVacantLower(int vacant)
         {
             List<TableParkingPlace> parking_places;
@@ -410,7 +410,7 @@ namespace Server.Model
         /// This method finds a list of parking places in the SQL database by its city.
         /// </summary>
         /// <param name="city"></param>
-        /// <returns></returns>
+        /// <returns>List<TableParkingPlace></returns>
         public List<TableParkingPlace> FindParkingByCity(string city)
         {
             List<TableParkingPlace> parking_places;
@@ -434,7 +434,7 @@ namespace Server.Model
         /// This method finds a list of parking places in the SQL database by its country.
         /// </summary>
         /// <param name="country"></param>
-        /// <returns></returns>
+        /// <returns>List<TableParkingPlace></returns>
         public List<TableParkingPlace> FindParkingByCountry(string country)
         {
             List<TableParkingPlace> parking_places;
@@ -466,7 +466,7 @@ namespace Server.Model
         /// <param name="vacant"></param>
         /// <param name="city"></param>
         /// <param name="country"></param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public string UpdateParking(int id, double longtitude, double latitude, double altitude, string parking_name, int spaces, int vacant, string city, string country)
         {
             string result = "";
@@ -553,7 +553,7 @@ namespace Server.Model
         /// This method deletes a parking place from the SQL database.
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public string DeleteParking(int id)
         {
             string result;
