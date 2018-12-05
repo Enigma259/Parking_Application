@@ -1,5 +1,6 @@
 ﻿using Server.Database;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Server.Model
@@ -179,6 +180,8 @@ namespace Server.Model
             int index;
             double current_distance;
             double shortest_distance;
+            double current_longtitude;
+            double current_latitude;
 
             try
             {
@@ -210,16 +213,31 @@ namespace Server.Model
                 shortest_distance = 0.0;
                 foreach(TableParkingPlace parking_place in parking_places)
                 {
-                    if(index == 0)
+                    current_longtitude = parking_place.longtitude - longtitude;
+                    current_latitude = parking_place.latitude - latitude;
+
+                    if (current_longtitude < 0)
                     {
-                        current_parking = parking_place;
-                        shortest_distance = Math.Sqrt((current_parking.longtitude * current_parking.longtitude) + (current_parking.latitude * current_parking.latitude));
+                        current_longtitude = current_longtitude * -1;
+                    }
+
+                    if (current_latitude < 0)
+                    {
+                        current_latitude = current_latitude * -1;
+                    }
+
+                    current_parking = parking_place;
+
+                    if (index == 0)
+                    {
+                        
+                        shortest_distance = Math.Sqrt((current_longtitude * current_longtitude) + (current_latitude * current_latitude));
                         index++;
                     }
 
                     else
                     {
-                        current_distance = Math.Sqrt((current_parking.longtitude * current_parking.longtitude) + (current_parking.latitude * current_parking.latitude));
+                        current_distance = Math.Sqrt((current_longtitude * current_longtitude) + (current_latitude * current_latitude));
 
                         if(current_distance < shortest_distance)
                         {

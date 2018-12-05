@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="psua0218_1026970" Class="Database_1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=kraka.ucn.dk;Initial Catalog=psua0218_1026970;Persist Security Info=True;User ID=psua0218_1026970" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="psua0218_1026970ConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.TableParkingPlaces" Member="TableParkingPlaces">
+    <Type Name="TableParkingPlace">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="longtitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="latitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="altitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="parking_name" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="spaces" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vacant" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="TableParkingPlace_TableReservation" Member="TableReservation" ThisKey="id" OtherKey="id" Type="TableReservation" Cardinality="One" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TableReservation" Member="TableReservations">
+    <Type Name="TableReservation">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="plate_number" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="time_from" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="time_to" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="parking_place_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="TableParkingPlace_TableReservation" Member="TableParkingPlace" ThisKey="id" OtherKey="id" Type="TableParkingPlace" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
