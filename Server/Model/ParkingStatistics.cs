@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace Server.Model
 {
@@ -10,29 +8,25 @@ namespace Server.Model
     /// </summary>
     public class ParkingStatistics
     {
-        //parking service request number.
-        private int psr_number;
-
-        //average amount of parking service request.
-        private double psr_average;
-
-        //list of parking service request numbers
-        private List<int> psr_numbers;
-
-        //last update of psr_average.
-        private DateTime last_update;
         private static volatile ParkingStatistics _instance;
         private static object syncRoot = new object();
+
+        private int request_number;
+
+        //time for average is in seconds.
+        private int time_for_average;
+        private List<DateTime> averages;
+        private int average;
 
         /// <summary>
         /// This is the constructor for the class ParkingStatistics.
         /// </summary>
-        private ParkingStatistics(int starting_number)
+        private ParkingStatistics()
         {
-            this.psr_number = starting_number;
-            this.psr_average = starting_number;
-            this.psr_numbers = new List<int>();
-            this.last_update = DateTime.Now;
+            this.request_number = 0;
+            this.time_for_average = 60;
+            this.averages = new List<DateTime>();
+            this.average = 0;
         }
 
         /// <summary>
@@ -47,7 +41,7 @@ namespace Server.Model
                 {
                     if (_instance == null)
                     {
-                        _instance = new ParkingStatistics(0);
+                        _instance = new ParkingStatistics();
                     }
                 }
             }
@@ -56,304 +50,130 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// This method returns the value of the instance psr_number.
-        /// </summary>
-        /// <returns>psr_number</returns>
-        public int GetPSRNumber()
-        {
-            return psr_number;
-        }
-
-        /// <summary>
-        /// This method returns the value of the instance psr_average.
-        /// </summary>
-        /// <returns>psr_average</returns>
-        public double GetPSRAverage()
-        {
-            return psr_average;
-        }
-
-        /// <summary>
-        /// This method returns the values in the list psr_numbers.
-        /// </summary>
-        /// <returns>psr_numbers</returns>
-        public List<int> GetPSRNumbers()
-        {
-            return psr_numbers;
-        }
-
-        /// <summary>
-        /// This method returns the values in the list last_update.
-        /// </summary>
-        /// <returns>last_update</returns>
-        public DateTime GetLastUpdate()
-        {
-            return last_update;
-        }
-
-        /// <summary>
-        /// This method changes the value of the instance psr_number.
-        /// </summary>
-        /// <param name="reset"></param>
-        public void SetPSRNumber(bool reset)
-        {
-            if(reset.Equals(true))
-            {
-                this.psr_number = 0;
-            }
-
-            else
-            {
-                this.psr_number++;
-            }
-        }
-
-        /// <summary>
-        /// This method changes the value of the instance psr_average.
-        /// </summary>
-        /// <param name="seconds"></param>
-        public void SetPSRAverage(int seconds)
-        {
-            if(GetPSRNumber() > 0)
-            {
-                this.psr_average = GetPSRNumber() / seconds;
-                AddPSRNumberToList(GetPSRNumber(), true);
-            }
-
-            else
-            {
-                this.psr_average = 0;
-            }
-        }
-
-        /// <summary>
-        /// This method either changes the list or adding new values to the list psr_numbers.
-        /// </summary>
-        /// <param name="list_of_psr_numbers"></param>
-        /// <param name="adding"></param>
-        public void SetPSRNumbers(List<int> list_of_psr_numbers, bool adding)
-        {
-            if(adding.Equals(true))
-            {
-                foreach(int number in list_of_psr_numbers)
-                {
-                    AddPSRNumberToList(number, false);
-                }
-            }
-
-            else
-            {
-                this.psr_numbers = list_of_psr_numbers;
-            }
-        }
-
-        public void SetLastUpdate()
-        {
-            this.last_update = DateTime.Now;
-        }
-
-        /// <summary>
-        /// This method adds a new value to the list psr_numbers.
-        /// </summary>
-        /// <param name="number"></param>
-        /// <param name="reset_psr_number"></param>
-        public void AddPSRNumberToList(int number, bool reset_psr_number)
-        {
-            GetPSRNumbers().Add(number);
-
-            if(reset_psr_number.Equals(true))
-            {
-                SetPSRNumber(true);
-            }
-        }
-
-        /// <summary>
-        /// This method increases the psr_number and if there has gone a minute or more it will update the psr_average.
-        /// </summary>
-        public void PSRNumberIncrease()
-        {
-            DateTime now = DateTime.Now;
-            int seconds = 60;
-            
-            if(now.Year == GetLastUpdate().Year)
-            {
-                if (now.Month == GetLastUpdate().Month)
-                {
-                    if (now.Day == GetLastUpdate().Day)
-                    {
-                        if (now.Hour == GetLastUpdate().Hour)
-                        {
-                            if (now.Minute > GetLastUpdate().Minute)
-                            {
-                                SetPSRAverage(seconds);
-                            }
-
-                            //if the minutes now isn't higher than the last update minute.
-                            else
-                            {
-                                SetPSRNumber(false);
-                            }
-                        }
-
-                        //if the two instances hour aren't equal.
-                        else
-                        {
-                            if(now.Hour - GetLastUpdate().Hour == 1)
-                            {
-                                if (now.Minute > GetLastUpdate().Minute)
-                                {
-                                    SetPSRAverage(seconds);
-                                }
-
-                                //if the minutes now isn't higher than the last update minute.
-                                else
-                                {
-                                    SetPSRNumber(false);
-                                }
-                            }
-
-                            else
-                            {
-                                SetPSRNumber(false);
-                            }
-                        }
-                    }
-
-                    //if the two instances days aren't equal.
-                    else
-                    {
-                        if (now.Day - GetLastUpdate().Day == 1)
-                        {
-                            if (now.Hour - GetLastUpdate().Hour == 1)
-                            {
-                                if (now.Minute > GetLastUpdate().Minute)
-                                {
-                                    SetPSRAverage(seconds);
-                                }
-
-                                //if the minutes now isn't higher than the last update minute.
-                                else
-                                {
-                                    SetPSRNumber(false);
-                                }
-                            }
-
-                            else
-                            {
-                                SetPSRNumber(false);
-                            }
-                        }
-
-                        else
-                        {
-                            SetPSRNumber(false);
-                        }
-                    }
-                }
-
-                //if the two instances months aren't equal.
-                else
-                {
-                    if (now.Month - GetLastUpdate().Month == 1)
-                    {
-                        if (now.Day - GetLastUpdate().Day == 1)
-                        {
-                            if (now.Hour - GetLastUpdate().Hour == 1)
-                            {
-                                if (now.Minute > GetLastUpdate().Minute)
-                                {
-                                    SetPSRAverage(seconds);
-                                }
-
-                                //if the minutes now isn't higher than the last update minute.
-                                else
-                                {
-                                    SetPSRNumber(false);
-                                }
-                            }
-
-                            else
-                            {
-                                SetPSRNumber(false);
-                            }
-                        }
-
-                        else
-                        {
-                            SetPSRNumber(false);
-                        }
-                    }
-
-                    else
-                    {
-                        SetPSRNumber(false);
-                    }
-                }
-            }
-
-            //if the two instances years aren't equal.
-            else
-            {
-                if (now.Year - GetLastUpdate().Year == 1)
-                {
-                    if (now.Month - GetLastUpdate().Month == 1)
-                    {
-                        if (now.Day - GetLastUpdate().Day == 1)
-                        {
-                            if (now.Hour - GetLastUpdate().Hour == 1)
-                            {
-                                if (now.Minute > GetLastUpdate().Minute)
-                                {
-                                    SetPSRAverage(seconds);
-                                }
-
-                                //if the minutes now isn't higher than the last update minute.
-                                else
-                                {
-                                    SetPSRNumber(false);
-                                }
-                            }
-
-                            else
-                            {
-                                SetPSRNumber(false);
-                            }
-                        }
-
-                        else
-                        {
-                            SetPSRNumber(false);
-                        }
-                    }
-
-                    else
-                    {
-                        SetPSRNumber(false);
-                    }
-                }
-
-                else
-                {
-                    SetPSRNumber(false);
-                }
-            }
-
-            SetLastUpdate();
-        }
-
-        /// <summary>
-        /// This method calculates the total psr_number and return the result.
+        /// This method returns tha value in the instance request_number.
         /// </summary>
         /// <returns></returns>
-        public int GetTotalPSRNumber()
+        public int GetRequestNumber()
         {
-            int result = 0;
-            List<int> psrs = GetPSRNumbers();
+            return request_number;
+        }
 
-            foreach(int number in psrs)
+        /// <summary>
+        /// This method returns tha value in the instance time_for_average.
+        /// </summary>
+        /// <returns></returns>
+        public int GetTimeForAverage()
+        {
+            return time_for_average;
+        }
+
+        /// <summary>
+        /// This method returns tha list averages.
+        /// </summary>
+        /// <returns></returns>
+        public List<DateTime> GetAverages()
+        {
+            return averages;
+        }
+
+        /// <summary>
+        /// This method returns tha value in the instance average.
+        /// </summary>
+        /// <returns></returns>
+        public int GetAverage()
+        {
+            return average;
+        }
+
+        /// <summary>
+        /// This method changes tha value in the instance request_number.
+        /// </summary>
+        /// <param name="reset"></param>
+        public void SetRequestNumber(bool reset)
+        {
+            if(reset)
             {
-                result += number;
+                this.request_number = 0;
             }
+
+            else
+            {
+                request_number++;
+            }
+        }
+
+        /// <summary>
+        /// This method changes tha value in the instance time_for_average.
+        /// </summary>
+        /// <param name="time_for_average"></param>
+        public void SetTimeForAverage(int time_for_average)
+        {
+            this.time_for_average = time_for_average;
+        }
+
+        /// <summary>
+        /// This method changes tha value in the instance averages.
+        /// </summary>
+        /// <param name="averages"></param>
+        public void SetAverages(List<DateTime> averages)
+        {
+            this.averages = averages;
+        }
+
+        /// <summary>
+        /// This method changes tha value in the instance average.
+        /// </summary>
+        public void SetAverage()
+        {
+            CheckAverages();
+            this.average = GetAverages().Count;
+        }
+
+        /// <summary>
+        /// This method removes the outdated values from the list averages.
+        /// </summary>
+        public void CheckAverages()
+        {
+            int index = 0;
+            DateTime current;
+            DateTime outdate_limit = DateTime.Now.Subtract(InsertSecondsToTimeSpan(GetTimeForAverage()));
+
+            while (index < GetAverages().Count)
+            {
+                current = GetAverages()[index];
+
+                if(current < outdate_limit)
+                {
+                    GetAverages().Remove(current);
+                }
+
+                else
+                {
+                    index++;
+                }
+            }
+        }
+
+        /// <summary>
+        /// This method adds a new time stamp for a request.
+        /// </summary>
+        public void NewRequest()
+        {
+            SetRequestNumber(false);
+            GetAverages().Add(DateTime.Now);
+            SetAverage();
+        }
+
+        /// <summary>
+        /// This method creates a time span and put an integer into the position where seconds are.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private TimeSpan InsertSecondsToTimeSpan(int value)
+        {
+            TimeSpan result;
+
+            result = new TimeSpan(0, 0, value);
 
             return result;
         }

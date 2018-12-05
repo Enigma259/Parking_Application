@@ -57,7 +57,7 @@ namespace Server.RabbitMQ.Receiver
                 Console.WriteLine(" Press [enter] to exit.");
                 Console.ReadLine();
 
-                statistics.PSRNumberIncrease();
+                statistics.NewRequest();
             }
         }
     }
