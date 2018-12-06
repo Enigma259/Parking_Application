@@ -54,7 +54,7 @@ namespace Server.Control
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <param name="parking_id"></param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public string Create(string plate_number, DateTime start, DateTime end, int parking_id)
         {
             string result;
@@ -86,7 +86,7 @@ namespace Server.Control
         /// <summary>
         /// This method list all the reservations.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List<TableReservation></returns>
         public List<TableReservation> ListAll()
         {
             return reservation.ListAllReservations();
@@ -96,7 +96,7 @@ namespace Server.Control
         /// This method finds a reservation by its id.
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>TableReservation</returns>
         public TableReservation FindById(int id)
         {
             return reservation.FindReservationById(id);
@@ -106,7 +106,7 @@ namespace Server.Control
         /// This method finds a reservation by its plate_number.
         /// </summary>
         /// <param name="plate_number"></param>
-        /// <returns></returns>
+        /// <returns>List<TableReservation></returns>
         public List<TableReservation> FindByPlateNumber(string plate_number)
         {
             return reservation.FindReservationByPlateNumber(plate_number);
@@ -116,7 +116,7 @@ namespace Server.Control
         /// This method finds a reservation by its start.
         /// </summary>
         /// <param name="start"></param>
-        /// <returns></returns>
+        /// <returns>List<TableReservation></returns>
         public List<TableReservation> FindByStart(DateTime start, string when)
         {
             List<TableReservation> result;
@@ -148,7 +148,7 @@ namespace Server.Control
         /// This method finds a reservation by its end.
         /// </summary>
         /// <param name="end"></param>
-        /// <returns></returns>
+        /// <returns>List<TableReservation></returns>
         public List<TableReservation> FindByEnd(DateTime end, string when)
         {
             List<TableReservation> result;
@@ -180,21 +180,21 @@ namespace Server.Control
         /// This method finds a reservation by its parking_id.
         /// </summary>
         /// <param name="parking_id"></param>
-        /// <returns></returns>
+        /// <returns>List<TableReservation></returns>
         public List<TableReservation> FindByParkingId(int parking_id)
         {
             return reservation.FindReservationByParkingId(parking_id);
         }
 
         /// <summary>
-        /// 
+        /// This method updates a reservation.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="plate_number"></param>
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <param name="parking_id"></param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public string Update(int id, string plate_number, DateTime start, DateTime end, int parking_id)
         {
             string result;
@@ -202,7 +202,7 @@ namespace Server.Control
 
             if(FindById(id).id >= 1)
             {
-                if (parking.id >= 0)
+                if (parking.id >= 1)
                 {
                     if (parking.vacant > 0)
                     {
@@ -232,11 +232,11 @@ namespace Server.Control
         }
 
         /// <summary>
-        /// 
+        /// This method deletes one or more reservations.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="what"></param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public string Delete(int id, string what)
         {
             string result;
@@ -279,10 +279,10 @@ namespace Server.Control
         }
 
         /// <summary>
-        /// 
+        /// This method updates the vacant spaces in a parking place.
         /// </summary>
         /// <param name="parking_id"></param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public string ActiveReservations(int parking_id)
         {
             string result;
