@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Control\CTR_Parking.cs" />
+    <Compile Include="Control\CTR_ParkingStatistics.cs" />
     <Compile Include="Database\SQL_Database.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

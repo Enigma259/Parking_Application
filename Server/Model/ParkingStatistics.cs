@@ -132,7 +132,7 @@ namespace Server.Model
         /// <summary>
         /// This method removes the outdated values from the list averages.
         /// </summary>
-        public void CheckAverages()
+        private void CheckAverages()
         {
             int index = 0;
             DateTime current;
