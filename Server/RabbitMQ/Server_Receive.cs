@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using Server.Control;
+using Server.Database;
 
 namespace Server.RabbitMQ
 {
@@ -24,6 +26,8 @@ namespace Server.RabbitMQ
         private bool multiple;
         private bool autoAck;
 
+        private CTR_ParkingStatistics ctr_stats;
+
         /// <summary>
         /// this is the constructor for the class Server_Receive.
         /// </summary>
@@ -40,6 +44,8 @@ namespace Server.RabbitMQ
             this.global = false;
             this.multiple = false;
             this.autoAck = false;
+
+            this.ctr_stats = CTR_ParkingStatistics.GetInstance();
         }
 
         /// <summary>
@@ -269,6 +275,7 @@ namespace Server.RabbitMQ
                     Console.WriteLine(" [x] Done");
 
                     channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: GetMultiple());
+                    ctr_stats.NewRequest();
                 };
                 channel.BasicConsume(queue: "task_queue", autoAck: GetAutoAck(), consumer: consumer);
 
