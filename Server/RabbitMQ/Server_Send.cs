@@ -39,7 +39,7 @@ namespace Server.RabbitMQ
         /// <summary>
         /// This method returns the value of the instance host_name.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public string GetHostName()
         {
             return host_name;
@@ -48,7 +48,7 @@ namespace Server.RabbitMQ
         /// <summary>
         /// This method returns the value of the instance queue.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public string GetQueue()
         {
             return queue;
@@ -57,7 +57,7 @@ namespace Server.RabbitMQ
         /// <summary>
         /// This method returns the value of the instance exchange.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public string GetExchange()
         {
             return exchange;
@@ -66,7 +66,7 @@ namespace Server.RabbitMQ
         /// <summary>
         /// This method returns the value of the instance routingKey.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public string GetRoutingKey()
         {
             return routingKey;
@@ -75,7 +75,7 @@ namespace Server.RabbitMQ
         /// <summary>
         /// This method returns the value of the instance durable.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bool</returns>
         public bool GetDurable()
         {
             return durable;
@@ -84,7 +84,7 @@ namespace Server.RabbitMQ
         /// <summary>
         /// This method returns the value of the instance exclusive.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bool</returns>
         public bool GetExclusive()
         {
             return exclusive;
@@ -93,7 +93,7 @@ namespace Server.RabbitMQ
         /// <summary>
         /// This method returns the value of the instance autoDelete.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bool</returns>
         public bool GetAutoDelete()
         {
             return autoDelete;
@@ -102,7 +102,7 @@ namespace Server.RabbitMQ
         /// <summary>
         /// This method returns the value of the instance arguments.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>IDictionary<string, object></returns>
         public IDictionary<string, object> GetArguments()
         {
             return arguments;
@@ -210,7 +210,7 @@ namespace Server.RabbitMQ
         /// This method gets the message from the command line argument.
         /// </summary>
         /// <param name="args"></param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         private string GetMessage(string[] args)
         {
             return ((args.Length > 0) ? string.Join(" ", args) : "Hello World!");
