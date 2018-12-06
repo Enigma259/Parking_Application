@@ -94,16 +94,14 @@
     <Compile Include="Model\Parking.cs" />
     <Compile Include="Model\ParkingStatistics.cs" />
     <Compile Include="Model\Reservation.cs" />
-    <Compile Include="RabbitMQ\Receiver\UserMessage.cs" />
+    <Compile Include="RabbitMQ\Server_Send.cs" />
     <Compile Include="Service1.svc.cs">
       <DependentUpon>Service1.svc</DependentUpon>
     </Compile>
     <Compile Include="IService1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="RabbitMQ\Sender\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Database\SQL_Database.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
