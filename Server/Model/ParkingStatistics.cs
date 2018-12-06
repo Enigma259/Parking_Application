@@ -52,7 +52,7 @@ namespace Server.Model
         /// <summary>
         /// This method returns tha value in the instance request_number.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>int</returns>
         public int GetRequestNumber()
         {
             return request_number;
@@ -61,7 +61,7 @@ namespace Server.Model
         /// <summary>
         /// This method returns tha value in the instance time_for_average.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>int</returns>
         public int GetTimeForAverage()
         {
             return time_for_average;
@@ -70,7 +70,7 @@ namespace Server.Model
         /// <summary>
         /// This method returns tha list averages.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List<DateTime></returns>
         public List<DateTime> GetAverages()
         {
             return averages;
@@ -79,7 +79,7 @@ namespace Server.Model
         /// <summary>
         /// This method returns tha value in the instance average.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>int</returns>
         public int GetAverage()
         {
             return average;
@@ -168,7 +168,7 @@ namespace Server.Model
         /// This method creates a time span and put an integer into the position where seconds are.
         /// </summary>
         /// <param name="value"></param>
-        /// <returns></returns>
+        /// <returns>TimeSpan</returns>
         private TimeSpan InsertSecondsToTimeSpan(int value)
         {
             TimeSpan result;
