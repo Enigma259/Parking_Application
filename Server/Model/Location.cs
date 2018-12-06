@@ -20,7 +20,7 @@ namespace Server.Model
         /// </summary>
         public Location()
         {
-            string result = GetLocation();
+            string result = SetLocation();
 
             if(result != "Done")
             {
@@ -88,7 +88,7 @@ namespace Server.Model
         /// This method get the current location.
         /// </summary>
         /// <returns></returns>
-        public string GetLocation()
+        public string SetLocation()
         {
             string result;
             GeoCoordinateWatcher watcher = new GeoCoordinateWatcher();

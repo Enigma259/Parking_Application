@@ -6,7 +6,7 @@ using Server.Model;
 
 namespace Server.Control
 {
-    public class CTR_ParkingStatistics
+    public sealed class CTR_ParkingStatistics
     {
         private static volatile CTR_ParkingStatistics _instance;
         private static object syncRoot = new object();

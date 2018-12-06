@@ -10,7 +10,7 @@ namespace Server.Control
     /// <summary>
     /// This is the class CTR_Reservation.
     /// </summary>
-    public class CTR_Reservation
+    public sealed class CTR_Reservation
     {
         private static volatile CTR_Reservation _instance;
         private static object syncRoot = new object();
