@@ -7,6 +7,9 @@ using Server.Database;
 
 namespace Server.Control
 {
+    /// <summary>
+    /// This is the class CTR_Reservation.
+    /// </summary>
     public class CTR_Reservation
     {
         private static volatile CTR_Reservation _instance;
@@ -45,7 +48,7 @@ namespace Server.Control
         }
 
         /// <summary>
-        /// 
+        /// This method creates a reservation.
         /// </summary>
         /// <param name="plate_number"></param>
         /// <param name="start"></param>
@@ -81,7 +84,7 @@ namespace Server.Control
         }
 
         /// <summary>
-        /// 
+        /// This method list all the reservations.
         /// </summary>
         /// <returns></returns>
         public List<TableReservation> ListAll()
@@ -90,7 +93,7 @@ namespace Server.Control
         }
 
         /// <summary>
-        /// 
+        /// This method finds a reservation by its id.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -100,7 +103,7 @@ namespace Server.Control
         }
 
         /// <summary>
-        /// 
+        /// This method finds a reservation by its plate_number.
         /// </summary>
         /// <param name="plate_number"></param>
         /// <returns></returns>
@@ -110,7 +113,7 @@ namespace Server.Control
         }
 
         /// <summary>
-        /// 
+        /// This method finds a reservation by its start.
         /// </summary>
         /// <param name="start"></param>
         /// <returns></returns>
@@ -142,7 +145,7 @@ namespace Server.Control
         }
 
         /// <summary>
-        /// 
+        /// This method finds a reservation by its end.
         /// </summary>
         /// <param name="end"></param>
         /// <returns></returns>
@@ -171,10 +174,10 @@ namespace Server.Control
             }
 
             return result;
-        }   
+        }
 
         /// <summary>
-        /// 
+        /// This method finds a reservation by its parking_id.
         /// </summary>
         /// <param name="parking_id"></param>
         /// <returns></returns>
