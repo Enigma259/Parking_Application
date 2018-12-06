@@ -41,49 +41,71 @@ namespace Server.Control
             return _instance;
         }
 
-        //
+        /// <summary>
+        /// This method gets the number of requests.
+        /// </summary>
+        /// <returns>int</returns>
         public int GetRequestNumber()
         {
             return p_stats.GetRequestNumber();
         }
 
-        //
+        /// <summary>
+        /// This method gets the time for average.
+        /// </summary>
+        /// <returns>int</returns>
         public int GetTimeForAverage()
         {
             return p_stats.GetTimeForAverage();
         }
 
-        //
+        /// <summary>
+        /// This method gets a list of averages.
+        /// </summary>
+        /// <returns>List<DateTime></returns>
         public List<DateTime> GetAverages()
         {
             return p_stats.GetAverages();
         }
 
-        //
+        /// <summary>
+        /// This method gets the average number.
+        /// </summary>
+        /// <returns>int</returns>
         public int GetAverage()
         {
             return p_stats.GetAverage();
         }
 
-        //
+        /// <summary>
+        /// This method updates the instance time_for_average.
+        /// </summary>
+        /// <param name="time_for_average"></param>
         public void SetTimeForAverage(int time_for_average)
         {
             p_stats.SetTimeForAverage(time_for_average);
         }
 
-        //
+        /// <summary>
+        /// This method updates the list averages.
+        /// </summary>
+        /// <param name="averages"></param>
         public void SetAverages(List<DateTime> averages)
         {
             p_stats.SetAverages(averages);
         }
 
-        //
+        /// <summary>
+        /// This method updates the instance average.
+        /// </summary>
         public void SetAverage()
         {
             p_stats.SetAverage();
         }
         
-        //
+        /// <summary>
+        /// This method adds a new request log.
+        /// </summary>
         public void NewRequest()
         {
             p_stats.NewRequest();

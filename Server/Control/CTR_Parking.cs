@@ -71,7 +71,7 @@ namespace Server.Control
         }
 
         /// <summary>
-        ///  This method finds the nearest parking place from a given location.
+        /// This method finds the nearest parking place from a given location.
         /// </summary>
         /// <param name="city"></param>
         /// <param name="country"></param>
