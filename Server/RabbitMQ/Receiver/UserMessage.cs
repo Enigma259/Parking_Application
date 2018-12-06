@@ -3,7 +3,7 @@ using RabbitMQ.Client.Events;
 using System;
 using System.Text;
 using System.Threading;
-using Server.Model;
+using Server.Control;
 
 
 namespace Server.RabbitMQ.Receiver
@@ -13,14 +13,14 @@ namespace Server.RabbitMQ.Receiver
     /// </summary>
     public class UserMessage
     {
-        private ParkingStatistics statistics;
+        private CTR_ParkingStatistics stats;
 
         /// <summary>
         /// This is the constructor for the class UserMessage.
         /// </summary>
         public UserMessage()
         {
-            this.statistics = ParkingStatistics.GetInstance();
+            this.stats = CTR_ParkingStatistics.GetInstance();
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Server.RabbitMQ.Receiver
                 Console.WriteLine(" Press [enter] to exit.");
                 Console.ReadLine();
 
-                statistics.NewRequest();
+                stats.NewRequest();
             }
         }
     }

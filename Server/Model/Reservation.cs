@@ -44,13 +44,13 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// 
+        /// This method creates a reservation in the database.
         /// </summary>
         /// <param name="plate_number"></param>
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <param name="parking_id"></param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public string CreateReservation(string plate_number, DateTime start, DateTime end, int parking_id)
         {
             string result;
@@ -90,9 +90,9 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// 
+        /// This method list all the reservations in the database.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List<TableReservation></returns>
         public List<TableReservation> ListAllReservations()
         {
             List<TableReservation> reservations;
@@ -113,10 +113,10 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// 
+        /// This method finds a reservation in the database by its id.
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>TableReservation</returns>
         public TableReservation FindReservationById(int id)
         {
             TableReservation reservation;
@@ -136,10 +136,10 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// 
+        /// This method finds a reservation in the database by its plate_number.
         /// </summary>
         /// <param name="plate_number"></param>
-        /// <returns></returns>
+        /// <returns>List<TableReservation></returns>
         public List<TableReservation> FindReservationByPlateNumber(string plate_number)
         {
             List<TableReservation> reservations;
@@ -160,10 +160,10 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// 
+        /// This method finds a reservation in the database by its start.
         /// </summary>
         /// <param name="start"></param>
-        /// <returns></returns>
+        /// <returns>List<TableReservation></returns>
         public List<TableReservation> FindReservationByStart(DateTime start)
         {
             List<TableReservation> reservations;
@@ -184,10 +184,10 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// 
+        /// This method finds a reservation in the database that is later than the start.
         /// </summary>
         /// <param name="start"></param>
-        /// <returns></returns>
+        /// <returns>List<TableReservation></returns>
         public List<TableReservation> FindReservationByStartLater(DateTime start)
         {
             List<TableReservation> reservations;
@@ -208,10 +208,10 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// 
+        /// This method finds a reservation in the database that is earlier than the start.
         /// </summary>
         /// <param name="start"></param>
-        /// <returns></returns>
+        /// <returns>List<TableReservation></returns>
         public List<TableReservation> FindReservationByStartEarlier(DateTime start)
         {
             List<TableReservation> reservations;
@@ -230,12 +230,12 @@ namespace Server.Model
 
             return reservations;
         }
-        
+
         /// <summary>
-        /// 
+        /// This method finds a reservation in the database by its end.
         /// </summary>
         /// <param name="end"></param>
-        /// <returns></returns>
+        /// <returns>List<TableReservation></returns>
         public List<TableReservation> FindReservationByEnd(DateTime end)
         {
             List<TableReservation> reservations;
@@ -256,10 +256,10 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// 
+        /// This method finds a reservation in the database that is later than the end.
         /// </summary>
         /// <param name="end"></param>
-        /// <returns></returns>
+        /// <returns>List<TableReservation></returns>
         public List<TableReservation> FindReservationByEndLater(DateTime end)
         {
             List<TableReservation> reservations;
@@ -280,10 +280,10 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// 
+        /// This method finds a reservation in the database that is earlier than the end.
         /// </summary>
         /// <param name="end"></param>
-        /// <returns></returns>
+        /// <returns>List<TableReservation></returns>
         public List<TableReservation> FindReservationByEndEarlier(DateTime end)
         {
             List<TableReservation> reservations;
@@ -304,10 +304,10 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// 
+        /// This method finds a reservation in the database by its parking_id.
         /// </summary>
         /// <param name="parking_id"></param>
-        /// <returns></returns>
+        /// <returns>List<TableReservation></returns>
         public List<TableReservation> FindReservationByParkingId(int parking_id)
         {
             List<TableReservation> reservations;
@@ -328,14 +328,14 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// 
+        /// This method updates a reservation in the database.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="plate_number"></param>
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <param name="parking_id"></param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public string UpdateReservation(int id, string plate_number, DateTime start, DateTime end, int parking_id)
         {
             string result = "";
@@ -393,10 +393,10 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// 
+        /// This method deletes a reservation from the database using its id.
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public string DeleteReservationById(int id)
         {
             string result;
@@ -426,10 +426,10 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// 
+        /// This method deletes a reservation from the database using its parking_id.
         /// </summary>
         /// <param name="parking_id"></param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public string DeleteReservationByParkingId(int parking_id)
         {
             string result;
@@ -459,10 +459,10 @@ namespace Server.Model
         }
 
         /// <summary>
-        /// 
+        /// This method finds a list of active reservations
         /// </summary>
         /// <param name="parking_id"></param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public int ActiveReservations(int parking_id)
         {
             int result = 0;

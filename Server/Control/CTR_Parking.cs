@@ -33,16 +33,16 @@ namespace Server.Control
         /// <param name="vacant"></param>
         /// <param name="city"></param>
         /// <param name="country"></param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public string Create(double longtitude, double latitude, double altitude, string parking_name, int spaces, int vacant, string city, string country)
         {
             return parking.CreateParking(longtitude, latitude, altitude, parking_name, spaces, vacant, city, country);
         }
-        
+
         /// <summary>
         /// This method lists all the parking places.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List<TableParkingPlace></returns>
         public List<TableParkingPlace> ListAll()
         {
             return parking.ListAllParkings();
@@ -52,7 +52,7 @@ namespace Server.Control
         /// This method finds a parking place by its id.
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>TableParkingPlace</returns>
         public TableParkingPlace FindById(int id)
         {
             return parking.FindParkingByid(id);
@@ -64,7 +64,7 @@ namespace Server.Control
         /// <param name="longtitude"></param>
         /// <param name="latitude"></param>
         /// <param name="altitude"></param>
-        /// <returns></returns>
+        /// <returns>List<TableParkingPlace></returns>
         public List<TableParkingPlace> FindByLocation(double longtitude, double latitude, double altitude)
         {
             return parking.FindParkingByLocation(longtitude, latitude, altitude);
@@ -77,7 +77,7 @@ namespace Server.Control
         /// <param name="country"></param>
         /// <param name="longtitude"></param>
         /// <param name="latitude"></param>
-        /// <returns></returns>
+        /// <returns>TableParkingPlace</returns>
         public TableParkingPlace FindNearest(string city, string country, double longtitude, double latitude)
         {
             return parking.FindNearestParking(city, country, longtitude, latitude);
@@ -87,7 +87,7 @@ namespace Server.Control
         /// This method finds a list of parking places by its parking_name.
         /// </summary>
         /// <param name="parking_name"></param>
-        /// <returns></returns>
+        /// <returns>List<TableParkingPlace></returns>
         public List<TableParkingPlace> FindByName(string parking_name)
         {
             return parking.FindParkingByParkingName(parking_name);
@@ -98,7 +98,7 @@ namespace Server.Control
         /// </summary>
         /// <param name="spaces"></param>
         /// <param name="where"></param>
-        /// <returns></returns>
+        /// <returns>List<TableParkingPlace></returns>
         public List<TableParkingPlace> FindBySpaces(int spaces, string where)
         {
             List<TableParkingPlace> result;
@@ -131,7 +131,7 @@ namespace Server.Control
         /// </summary>
         /// <param name="vacant"></param>
         /// <param name="where"></param>
-        /// <returns></returns>
+        /// <returns>List<TableParkingPlace></returns>
         public List<TableParkingPlace> FindByVacant(int vacant, string where)
         {
             List<TableParkingPlace> result;
@@ -163,7 +163,7 @@ namespace Server.Control
         /// This method finds a list of parking places by its city.
         /// </summary>
         /// <param name="city"></param>
-        /// <returns></returns>
+        /// <returns>List<TableParkingPlace></returns>
         public List<TableParkingPlace> FindByCity(string city)
         {
             return parking.FindParkingByCity(city);
@@ -173,7 +173,7 @@ namespace Server.Control
         /// This method finds a list of parking places by its country.
         /// </summary>
         /// <param name="country"></param>
-        /// <returns></returns>
+        /// <returns>List<TableParkingPlace></returns>
         public List<TableParkingPlace> FindByCountry(string country)
         {
             return parking.FindParkingByCountry(country);
@@ -191,7 +191,7 @@ namespace Server.Control
         /// <param name="vacant"></param>
         /// <param name="city"></param>
         /// <param name="country"></param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public string Update(int id, double longtitude, double latitude, double altitude, string parking_name, int spaces, int vacant, string city, string country)
         {
             return parking.UpdateParking(id, longtitude, latitude, altitude, parking_name, spaces, vacant, city, country);
@@ -201,7 +201,7 @@ namespace Server.Control
         /// This method deletes a parking place.
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public string Delete(int id)
         {
             return parking.DeleteParking(id);
