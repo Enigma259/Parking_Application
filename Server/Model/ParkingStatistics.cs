@@ -6,7 +6,7 @@ namespace Server.Model
     /// <summary>
     /// This is the class ParkingStatistics.
     /// </summary>
-    public class ParkingStatistics
+    public sealed class ParkingStatistics
     {
         private static volatile ParkingStatistics _instance;
         private static object syncRoot = new object();

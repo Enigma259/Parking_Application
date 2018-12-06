@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace Server.Model
 {
+    /// <summary>
+    /// This is the class Parking.
+    /// </summary>
     public sealed class Parking
     {
         private static volatile Parking _instance;

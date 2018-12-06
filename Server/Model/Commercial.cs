@@ -12,7 +12,7 @@ namespace Server.Model
     /// <summary>
     /// This is the class Commercial.
     /// </summary>
-    public class Commercial
+    public sealed class Commercial
     {
         private static volatile Commercial _instance;
         private static object syncRoot = new object();
