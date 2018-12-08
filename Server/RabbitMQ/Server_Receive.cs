@@ -534,10 +534,6 @@ namespace Server.RabbitMQ
 
             send_result = new Server_Send(information[3], result);
             send_result.SendMessage(args);
-
-            /*
-             * Code her to send result back to User.
-             */
         }
 
         /// <summary>
