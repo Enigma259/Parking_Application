@@ -274,11 +274,12 @@ namespace Server.RabbitMQ
                     var body = ea.Body;
                     var message = Encoding.UTF8.GetString(body);
                     Console.WriteLine(" [x] Received {0}", message);
-
+                    
                     int dots = message.Split('.').Length - 1;
                     Thread.Sleep(dots * 1000);
 
                     Console.WriteLine(" [x] Done");
+                    Tasks(args, message);
 
                     channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: GetMultiple());
                 };
@@ -293,7 +294,7 @@ namespace Server.RabbitMQ
         /// This method takes the received message and executes the task that the meessage tells it to do.
         /// </summary>
         /// <param name="message"></param>
-        public void Tasks(string message)
+        public void Tasks(string[] args, string message)
         {
             stats.NewRequest();
 
@@ -304,35 +305,35 @@ namespace Server.RabbitMQ
             switch (information[0])
             {
                 case "Get Neareest Parking Place":
-                    NearestParkingPlace(information);
+                    NearestParkingPlace(args, information);
                     break;
 
                 case "Get Location":
-                    GetLocation(information);
+                    GetLocation(args, information);
                     break;
 
                 case "Get Request Number":
-                    GetRequestNumber();
+                    GetRequestNumber(args, information);
                     break;
 
                 case "Get Average Number":
-                    GetAverageNumber();
+                    GetAverageNumber(args, information);
                     break;
 
                 case "Create Reservation":
-                    CreateReservation(information);
+                    CreateReservation(args, information);
                     break;
 
                 case "Update Reservation":
-                    UpdateReservation(information);
+                    UpdateReservation(args, information);
                     break;
 
                 case "Delete Reservation":
-                    DeleteReservation(information);
+                    DeleteReservation(args, information);
                     break;
 
                 default:
-                    Switch_Default();
+                    Switch_Default(args, information);
                     break;
             }
         }
@@ -393,11 +394,13 @@ namespace Server.RabbitMQ
         /// This method find the nearest parking place and send it back to the specific user.
         /// </summary>
         /// <param name="information"></param>
-        public void NearestParkingPlace(List<string> information)
+        public void NearestParkingPlace(string[] args, List<string> information)
         {
             stats.NewRequest();
             Console.WriteLine("executing task: Get Neareest Parking Place");
 
+            Server_Send send_result;
+            string result;
             string city = information[1];
             string country = information[2];
             double longtitude = Double.Parse(information[3]);
@@ -405,16 +408,17 @@ namespace Server.RabbitMQ
 
             TableParkingPlace nearest = parking.FindNearest(city, country, longtitude, latitude);
 
-            /*
-             * Code her to send result back to User.
-             */
+            result = nearest.parking_name + "$$$" + nearest.longtitude + "$$$" + nearest.latitude + "$$$" + nearest.altitude;
+
+            send_result = new Server_Send(information[5], result);
+            send_result.SendMessage(args);
         }
 
         /// <summary>
         /// This method gets the location and send it back to the specific user.
         /// </summary>
         /// <param name="information"></param>
-        public void GetLocation(List<string> information)
+        public void GetLocation(string[] args, List<string> information)
         {
             stats.NewRequest();
             Console.WriteLine("executing task: Get Location");
@@ -425,73 +429,81 @@ namespace Server.RabbitMQ
             double lattitude = location.GetLatitude();
             double altitude = location.GetAltitude();
             string result;
-            Server_Send send_message;
+            Server_Send send_result;
 
             result = longtitude + "$$$" + lattitude + "$$$" + altitude;
 
-            /*
-             * Code her to send result back to User.
-             */
+            send_result = new Server_Send(information[1], result);
+            send_result.SendMessage(args);
         }
 
         /// <summary>
         /// This method gets the number of requests and send it back to the specific user.
         /// </summary>
-        public void GetRequestNumber()
+        public void GetRequestNumber(string[] args, List<string> information)
         {
             stats.NewRequest();
             Console.WriteLine("executing task: Get Request Number");
 
+            Server_Send send_result;
             int request_number = stats.GetRequestNumber();
 
             string result = "" + request_number;
 
-            /*
-             * Code her to send result back to User.
-             */
+            send_result = new Server_Send(information[1], result);
+            send_result.SendMessage(args);
         }
 
-        //
-        public void GetAverageNumber()
+        /// <summary>
+        /// This method get the average number of request and send it to the user.
+        /// </summary>
+        public void GetAverageNumber(string[] args, List<string> information)
         {
             stats.NewRequest();
             Console.WriteLine("executing task: Get Average Number");
 
+            Server_Send send_result;
             int average = stats.GetAverage();
 
             string result = "" + average;
 
-            /*
-             * Code her to send result back to User.
-             */
+            send_result = new Server_Send(information[1], result);
+            send_result.SendMessage(args);
         }
 
-        //
-        public void CreateReservation(List<string> information)
+        /// <summary>
+        /// This method creates a reservation and send the response to the user.
+        /// </summary>
+        /// <param name="information"></param>
+        public void CreateReservation(string[] args, List<string> information)
         {
             stats.NewRequest();
             Console.WriteLine("executing task: Create Reservation");
 
             string result;
+            Server_Send send_result;
             string plate_number = information[1];
             DateTime start = DateTime.Parse(information[2]);
             DateTime end = DateTime.Parse(information[3]);
             int parking_id = int.Parse(information[4]);
-            
+
             result = reservation.Create(plate_number, start, end, parking_id);
 
-            /*
-             * Code her to send result back to User.
-             */
+            send_result = new Server_Send(information[5], result);
+            send_result.SendMessage(args);
         }
 
-        //
-        public void UpdateReservation(List<string> information)
+        /// <summary>
+        /// This method updates a reservation and send the response to the user.
+        /// </summary>
+        /// <param name="information"></param>
+        public void UpdateReservation(string[] args, List<string> information)
         {
             stats.NewRequest();
             Console.WriteLine("executing task: Update Reservation");
 
             string result;
+            Server_Send send_result;
             int id = int.Parse(information[1]);
             string plate_number = information[2];
             DateTime start = DateTime.Parse(information[3]);
@@ -500,40 +512,47 @@ namespace Server.RabbitMQ
 
             result = reservation.Update(id, plate_number, start, end, parking_id);
 
-
-            /*
-             * Code her to send result back to User.
-             */
+            send_result = new Server_Send(information[6], result);
+            send_result.SendMessage(args);
         }
 
-        //
-        public void DeleteReservation(List<string> information)
+        /// <summary>
+        /// This method deletes a reservation and send the response to the user.
+        /// </summary>
+        /// <param name="information"></param>
+        public void DeleteReservation(string[] args, List<string> information)
         {
             stats.NewRequest();
             Console.WriteLine("executing task: Delete Reservation");
 
             string result;
+            Server_Send send_result;
             int id = int.Parse(information[1]);
             string id_type = information[2];
 
             result = reservation.Delete(id, id_type);
+
+            send_result = new Server_Send(information[3], result);
+            send_result.SendMessage(args);
 
             /*
              * Code her to send result back to User.
              */
         }
 
-        //
-        public void Switch_Default()
+        /// <summary>
+        /// This method send s a response if it doesn't know what to do with the information.
+        /// </summary>
+        public void Switch_Default(string[] args, List<string> information)
         {
             stats.NewRequest();
             string result;
+            Server_Send send_result;
 
             result = " This feature is not available.";
 
-            /*
-             * Code her to send result back to User.
-             */
+            send_result = new Server_Send(information[1], result);
+            send_result.SendMessage(args);
         }
     }
 }
