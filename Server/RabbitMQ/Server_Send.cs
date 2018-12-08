@@ -13,207 +13,116 @@ namespace Server.RabbitMQ
     public class Server_Send
     {
         private string host_name;
-        private string queue;
-        private string exchange;
-        private string routingKey;
-        private bool durable;
-        private bool exclusive;
-        private bool autoDelete;
-        private IDictionary<string, object> arguments;
+        private string excahnge;
+        private string type;
+        private string message;
 
         /// <summary>
-        /// This is the constructor for the class Server_Receive.
+        /// This is the contructor for the class Server_Send.
         /// </summary>
-        public Server_Send()
+        /// <param name="type"></param>
+        /// <param name="message"></param>
+        public Server_Send(string type, string message)
         {
-            this.host_name = "localhost - Tasks";
-            this.queue = "task_queue";
-            this.exchange = "";
-            this.routingKey = "task_queue";
-            this.durable = true;
-            this.exclusive = false;
-            this.autoDelete = false;
-            this.arguments = null;
+            this.host_name = "localhost - User";
+            this.excahnge = "direct_logs";
+            this.type = type;
+            this.message = message;
         }
 
         /// <summary>
         /// This method returns the value of the instance host_name.
         /// </summary>
-        /// <returns>string</returns>
-        public string GetHostName()
+        /// <returns></returns>
+        public string GethostName()
         {
             return host_name;
         }
 
         /// <summary>
-        /// This method returns the value of the instance queue.
+        /// This method returns the value of the instance excahnge.
         /// </summary>
-        /// <returns>string</returns>
-        public string GetQueue()
+        /// <returns></returns>
+        public string GetExcahnge()
         {
-            return queue;
+            return excahnge;
         }
 
         /// <summary>
-        /// This method returns the value of the instance exchange.
+        /// This method returns the value of the instance type.
         /// </summary>
-        /// <returns>string</returns>
-        public string GetExchange()
+        /// <returns></returns>
+        public string GetType()
         {
-            return exchange;
+            return type;
         }
 
         /// <summary>
-        /// This method returns the value of the instance routingKey.
+        /// This method returns the value of the instance message.
         /// </summary>
-        /// <returns>string</returns>
-        public string GetRoutingKey()
+        /// <returns></returns>
+        public string GetMessage()
         {
-            return routingKey;
-        }
-
-        /// <summary>
-        /// This method returns the value of the instance durable.
-        /// </summary>
-        /// <returns>bool</returns>
-        public bool GetDurable()
-        {
-            return durable;
-        }
-
-        /// <summary>
-        /// This method returns the value of the instance exclusive.
-        /// </summary>
-        /// <returns>bool</returns>
-        public bool GetExclusive()
-        {
-            return exclusive;
-        }
-
-        /// <summary>
-        /// This method returns the value of the instance autoDelete.
-        /// </summary>
-        /// <returns>bool</returns>
-        public bool GetAutoDelete()
-        {
-            return autoDelete;
-        }
-
-        /// <summary>
-        /// This method returns the value of the instance arguments.
-        /// </summary>
-        /// <returns>IDictionary<string, object></returns>
-        public IDictionary<string, object> GetArguments()
-        {
-            return arguments;
+            return message;
         }
 
         /// <summary>
         /// This method changes the value of the instance host_name.
         /// </summary>
         /// <param name="host_name"></param>
-        public void SetHostName(string host_name)
+        public void SethostName(string host_name)
         {
             this.host_name = host_name;
         }
 
         /// <summary>
-        /// This method changes the value of the instance queue.
+        /// This method changes the value of the instance excahnge.
         /// </summary>
-        /// <param name="queue"></param>
-        public void SetQueue(string queue)
+        /// <param name="excahnge"></param>
+        public void SetExcahnge(string excahnge)
         {
-            this.queue = queue;
+            this.excahnge = excahnge;
         }
 
         /// <summary>
-        /// This method changes the value of the instance exchange.
+        /// This method changes the value of the instance type.
         /// </summary>
-        /// <param name="exchange"></param>
-        public void SetExchange(string exchange)
+        /// <param name="type"></param>
+        public void SetType(string type)
         {
-            this.exchange = exchange;
+            this.type = type;
         }
 
         /// <summary>
-        /// This method changes the value of the instance routingKey.
+        /// This method changes the value of the instance message.
         /// </summary>
-        /// <param name="routingKey"></param>
-        public void SetRoutingKey(string routingKey)
+        /// <param name="message"></param>
+        public void SetMessage(string message)
         {
-            this.routingKey = routingKey;
+            this.message = message;
         }
 
         /// <summary>
-        /// This method changes the value of the instance durable.
-        /// </summary>
-        /// <param name="durable"></param>
-        public void SetDurable(bool durable)
-        {
-            this.durable = durable;
-        }
-
-        /// <summary>
-        /// This method changes the value of the instance exclusive.
-        /// </summary>
-        /// <param name="exclusive"></param>
-        public void SetExclusive(bool exclusive)
-        {
-            this.exclusive = exclusive;
-        }
-
-        /// <summary>
-        /// This method changes the value of the instance autoDelete.
-        /// </summary>
-        /// <param name="autoDelete"></param>
-        public void SetAutoDelete(bool autoDelete)
-        {
-            this.autoDelete = autoDelete;
-        }
-
-        /// <summary>
-        /// This method changes the value of the instance arguments.
-        /// </summary>
-        /// <param name="arguments"></param>
-        public void SetArguments(IDictionary<string, object> arguments)
-        {
-            this.arguments = arguments;
-        }
-
-        /// <summary>
-        /// This method Sends results to a user.
+        /// This method sends the result from the server to a specific user.
         /// </summary>
         /// <param name="args"></param>
-        public void SendTask(string[] args)
+        public void SendMessage(string[] args)
         {
-            var factory = new ConnectionFactory() { HostName = GetHostName() };
+            var factory = new ConnectionFactory() { HostName = "localhost" };
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
-                channel.QueueDeclare(queue: GetQueue(), durable: GetDurable(), exclusive: GetDurable(), autoDelete: GetAutoDelete(), arguments: GetArguments());
+                channel.ExchangeDeclare(exchange: "direct_logs", type: "direct");
 
-                var message = GetMessage(args);
+                var severity = (args.Length > 0) ? args[0] : "info";
+                var message = (args.Length > 1) ? string.Join(" ", args.Skip(1).ToArray()) : "Hello World!";
                 var body = Encoding.UTF8.GetBytes(message);
-
-                var properties = channel.CreateBasicProperties();
-                properties.Persistent = true;
-
-                channel.BasicPublish(exchange: GetExchange(), routingKey: GetRoutingKey(), basicProperties: properties, body: body);
-                Console.WriteLine(" [x] Sent {0}", message);
+                channel.BasicPublish(exchange: "direct_logs", routingKey: severity, basicProperties: null, body: body);
+                Console.WriteLine(" [x] Sent '{0}':'{1}'", severity, message);
             }
 
             Console.WriteLine(" Press [enter] to exit.");
             Console.ReadLine();
-        }
-
-        /// <summary>
-        /// This method gets the message from the command line argument.
-        /// </summary>
-        /// <param name="args"></param>
-        /// <returns>string</returns>
-        private string GetMessage(string[] args)
-        {
-            return ((args.Length > 0) ? string.Join(" ", args) : "Hello World!");
         }
     }
 }
