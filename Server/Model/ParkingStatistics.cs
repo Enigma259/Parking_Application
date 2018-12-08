@@ -91,7 +91,7 @@ namespace Server.Model
         /// <param name="reset"></param>
         public void SetRequestNumber(bool reset)
         {
-            if(reset)
+            if (reset || GetRequestNumber().Equals(int.MaxValue))
             {
                 this.request_number = 0;
             }

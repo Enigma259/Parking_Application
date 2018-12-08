@@ -1,11 +1,11 @@
 ﻿using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using Server.Control;
+using Server.Database;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
-using Server.Control;
-using Server.Database;
 
 namespace Server.RabbitMQ
 {
@@ -26,7 +26,10 @@ namespace Server.RabbitMQ
         private bool multiple;
         private bool autoAck;
 
-        private CTR_ParkingStatistics ctr_stats;
+        private CTR_Location location;
+        private CTR_Parking parking;
+        private CTR_ParkingStatistics stats;
+        private CTR_Reservation reservation;
 
         /// <summary>
         /// this is the constructor for the class Server_Receive.
@@ -45,7 +48,10 @@ namespace Server.RabbitMQ
             this.multiple = false;
             this.autoAck = false;
 
-            this.ctr_stats = CTR_ParkingStatistics.GetInstance();
+            this.location = CTR_Location.GetInstance();
+            this.parking = new CTR_Parking();
+            this.stats = CTR_ParkingStatistics.GetInstance();
+            this.reservation = CTR_Reservation.GetInstance();
         }
 
         /// <summary>
@@ -275,13 +281,251 @@ namespace Server.RabbitMQ
                     Console.WriteLine(" [x] Done");
 
                     channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: GetMultiple());
-                    ctr_stats.NewRequest();
                 };
                 channel.BasicConsume(queue: "task_queue", autoAck: GetAutoAck(), consumer: consumer);
 
                 Console.WriteLine(" Press [enter] to exit.");
                 Console.ReadLine();
             }
+        }
+
+        /// <summary>
+        /// This method takes the received message and executes the task that the meessage tells it to do.
+        /// </summary>
+        /// <param name="message"></param>
+        public void Tasks(string message)
+        {
+            stats.NewRequest();
+
+            List<string> information;
+            information = SplitMessage(message);
+
+            Console.WriteLine("Finding task to execute.");
+            switch (information[0])
+            {
+                case "Get Neareest Parking Place":
+                    NearestParkingPlace(information);
+                    break;
+
+                case "Get Location":
+                    GetLocation(information);
+                    break;
+
+                case "Get Request Number":
+                    GetRequestNumber();
+                    break;
+
+                case "Get Average Number":
+                    GetAverageNumber();
+                    break;
+
+                case "Create Reservation":
+                    CreateReservation(information);
+                    break;
+
+                case "Update Reservation":
+                    UpdateReservation(information);
+                    break;
+
+                case "Delete Reservation":
+                    DeleteReservation(information);
+                    break;
+
+                default:
+                    Switch_Default();
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// This method splits the message up into smaller parts so it can be handled.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public List<string> SplitMessage(string message)
+        {
+            Console.WriteLine("Splitting up the message: " + message);
+
+            int index = 0;
+            string part_information = "";
+            bool part_started = false;
+            List<string> information = new List<string>();
+
+            //getting the task out of message.
+            while (index < message.Length)
+            {
+                if (!message[index].Equals("$"))
+                {
+                    if (part_started.Equals(false) && message[index].Equals(" "))
+                    {
+                        index++;
+                    }
+
+                    else
+                    {
+                        part_started = true;
+                        part_information = part_information + message[index];
+                        index++;
+                    }
+                }
+
+                else
+                {
+                    if (part_started.Equals(true))
+                    {
+                        information.Add(part_information);
+                        part_information = "";
+                        part_started = false;
+                        index++;
+                    }
+
+                    else
+                    {
+                        index++;
+                    }
+                }
+            }
+
+            return information;
+        }
+
+        /// <summary>
+        /// This method find the nearest parking place and send it back to the specific user.
+        /// </summary>
+        /// <param name="information"></param>
+        public void NearestParkingPlace(List<string> information)
+        {
+            stats.NewRequest();
+            Console.WriteLine("executing task: Get Neareest Parking Place");
+
+            string city = information[1];
+            string country = information[2];
+            double longtitude = Double.Parse(information[3]);
+            double latitude = Double.Parse(information[4]);
+
+            TableParkingPlace nearest = parking.FindNearest(city, country, longtitude, latitude);
+
+            /*
+             * Code her to send result back to User.
+             */
+        }
+
+        /// <summary>
+        /// This method gets the location and send it back to the specific user.
+        /// </summary>
+        /// <param name="information"></param>
+        public void GetLocation(List<string> information)
+        {
+            stats.NewRequest();
+            Console.WriteLine("executing task: Get Location");
+
+            location.SetLocation();
+
+            double longtitude = location.GetLongtitude();
+            double lattitude = location.GetLatitude();
+            double altitude = location.GetAltitude();
+
+            /*
+             * Code her to send result back to User.
+             */
+        }
+
+        /// <summary>
+        /// This method gets the number of requests and send it back to the specific user.
+        /// </summary>
+        public void GetRequestNumber()
+        {
+            stats.NewRequest();
+            Console.WriteLine("executing task: Get Request Number");
+
+            int result = stats.GetRequestNumber();
+
+            /*
+             * Code her to send result back to User.
+             */
+        }
+
+        //
+        public void GetAverageNumber()
+        {
+            stats.NewRequest();
+            Console.WriteLine("executing task: Get Average Number");
+
+            int result = stats.GetAverage();
+
+            /*
+             * Code her to send result back to User.
+             */
+        }
+
+        //
+        public void CreateReservation(List<string> information)
+        {
+            stats.NewRequest();
+            Console.WriteLine("executing task: Create Reservation");
+
+            string result;
+            string plate_number = information[1];
+            DateTime start = DateTime.Parse(information[2]);
+            DateTime end = DateTime.Parse(information[3]);
+            int parking_id = int.Parse(information[4]);
+            
+            result = reservation.Create(plate_number, start, end, parking_id);
+
+            /*
+             * Code her to send result back to User.
+             */
+        }
+
+        //
+        public void UpdateReservation(List<string> information)
+        {
+            stats.NewRequest();
+            Console.WriteLine("executing task: Update Reservation");
+
+            string result;
+            int id = int.Parse(information[1]);
+            string plate_number = information[2];
+            DateTime start = DateTime.Parse(information[3]);
+            DateTime end = DateTime.Parse(information[4]);
+            int parking_id = int.Parse(information[5]);
+
+            result = reservation.Update(id, plate_number, start, end, parking_id);
+
+
+            /*
+             * Code her to send result back to User.
+             */
+        }
+
+        //
+        public void DeleteReservation(List<string> information)
+        {
+            stats.NewRequest();
+            Console.WriteLine("executing task: Delete Reservation");
+
+            string result;
+            int id = int.Parse(information[1]);
+            string id_type = information[2];
+
+            result = reservation.Delete(id, id_type);
+
+            /*
+             * Code her to send result back to User.
+             */
+        }
+
+        //
+        public void Switch_Default()
+        {
+            stats.NewRequest();
+            string result;
+
+            result = " This feature is not available.";
+
+            /*
+             * Code her to send result back to User.
+             */
         }
     }
 }
