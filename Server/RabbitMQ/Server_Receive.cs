@@ -424,6 +424,10 @@ namespace Server.RabbitMQ
             double longtitude = location.GetLongtitude();
             double lattitude = location.GetLatitude();
             double altitude = location.GetAltitude();
+            string result;
+            Server_Send send_message;
+
+            result = longtitude + "$$$" + lattitude + "$$$" + altitude;
 
             /*
              * Code her to send result back to User.
@@ -438,7 +442,9 @@ namespace Server.RabbitMQ
             stats.NewRequest();
             Console.WriteLine("executing task: Get Request Number");
 
-            int result = stats.GetRequestNumber();
+            int request_number = stats.GetRequestNumber();
+
+            string result = "" + request_number;
 
             /*
              * Code her to send result back to User.
@@ -451,7 +457,9 @@ namespace Server.RabbitMQ
             stats.NewRequest();
             Console.WriteLine("executing task: Get Average Number");
 
-            int result = stats.GetAverage();
+            int average = stats.GetAverage();
+
+            string result = "" + average;
 
             /*
              * Code her to send result back to User.
