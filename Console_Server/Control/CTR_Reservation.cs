@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Server.Model;
-using Server.Database;
+using Console_Server.Model;
+using Console_Server.Database;
 
 namespace Console_Server.Control
 {

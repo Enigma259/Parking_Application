@@ -1,7 +1,7 @@
 ﻿using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using Server.Control;
-using Server.Database;
+using Console_Server.Control;
+using Console_Server.Database;
 using System;
 using System.Collections.Generic;
 using System.Text;

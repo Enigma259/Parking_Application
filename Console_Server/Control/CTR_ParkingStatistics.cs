@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Server.Model;
+using Console_Server.Model;
 
 namespace Console_Server.Control
 {
