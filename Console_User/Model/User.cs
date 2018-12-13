@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Console_User.Model
 {
     /// <summary>
-    /// 
+    /// This is the class User.
     /// </summary>
     public class User
     {
@@ -35,7 +35,7 @@ namespace Console_User.Model
         }
 
         /// <summary>
-        /// 
+        /// This method returns the value of the instance name.
         /// </summary>
         /// <returns></returns>
         public string GetName()
@@ -44,7 +44,7 @@ namespace Console_User.Model
         }
 
         /// <summary>
-        /// 
+        /// This method returns the value of the instance email.
         /// </summary>
         /// <returns></returns>
         public string GetEmail()
@@ -53,7 +53,7 @@ namespace Console_User.Model
         }
 
         /// <summary>
-        /// 
+        /// This method returns the value of the instance mobile.
         /// </summary>
         /// <returns></returns>
         public string GetMobile()
@@ -62,7 +62,7 @@ namespace Console_User.Model
         }
 
         /// <summary>
-        /// 
+        /// This method returns the value of the instance plate_number.
         /// </summary>
         /// <returns></returns>
         public string GetPlateNumber()
@@ -71,7 +71,7 @@ namespace Console_User.Model
         }
 
         /// <summary>
-        /// 
+        /// This method returns the value of the instance location.
         /// </summary>
         /// <returns></returns>
         public Location GetLocation()
@@ -82,7 +82,7 @@ namespace Console_User.Model
         }
 
         /// <summary>
-        /// 
+        /// This method changes the value of the instance name.
         /// </summary>
         /// <param name="name"></param>
         public void SetName(string name)
@@ -91,7 +91,7 @@ namespace Console_User.Model
         }
 
         /// <summary>
-        /// 
+        /// This method changes the value of the instance email.
         /// </summary>
         /// <param name="email"></param>
         public void SetEmail(string email)
@@ -100,7 +100,7 @@ namespace Console_User.Model
         }
 
         /// <summary>
-        /// 
+        /// This method changes the value of the instance mobile.
         /// </summary>
         /// <param name="mobile"></param>
         public void SetMobile(string mobile)
@@ -109,7 +109,7 @@ namespace Console_User.Model
         }
 
         /// <summary>
-        /// 
+        /// This method changes the value of the instance plate_number.
         /// </summary>
         /// <param name="plate_number"></param>
         public void SetPlateNumber(string plate_number)
@@ -118,7 +118,7 @@ namespace Console_User.Model
         }
 
         /// <summary>
-        /// 
+        /// This method changes the value of the instance location.
         /// </summary>
         /// <param name="location"></param>
         public void SetLocation(Location location)
