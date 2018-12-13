@@ -78,15 +78,8 @@ namespace Console_User.Control
                 user.SetPlateNumber(plate_number);
             }
 
-            if(changed.Equals(true))
-            {
-                result = "Update complete";
-            }
-
-            else
-            {
-                result = "Nothing to change";
-            }
+            user.UpdateLocation();
+            result = "Update complete";
 
             return result;
         }
