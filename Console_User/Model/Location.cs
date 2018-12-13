@@ -27,7 +27,6 @@ namespace Console_User.Model
         /// <summary>
         /// This is a multi threaded singleton for the class Location.
         /// </summary>
-        /// <param name="update_sequence_seconds"></param>
         /// <returns>_instance</returns>
         public static Location GetInstance()
         {
