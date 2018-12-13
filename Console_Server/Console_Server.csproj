@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Control\" />
+    <Folder Include="Database\" />
     <Folder Include="Model\" />
     <Folder Include="RabbitMQ\" />
   </ItemGroup>
