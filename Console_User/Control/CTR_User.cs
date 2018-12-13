@@ -7,6 +7,9 @@ using Console_User.Model;
 
 namespace Console_User.Control
 {
+    /// <summary>
+    /// This is the class CTR_User.
+    /// </summary>
     public class CTR_User
     {
         private static volatile CTR_User _instance;
@@ -42,7 +45,7 @@ namespace Console_User.Control
         }
 
         /// <summary>
-        /// 
+        /// This method updates the information of the user.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="email"></param>
@@ -84,10 +87,12 @@ namespace Console_User.Control
             {
                 result = "Nothing to change";
             }
+
+            return result;
         }
 
         /// <summary>
-        /// 
+        /// This method returns the user.
         /// </summary>
         /// <returns></returns>
         public User GetUser()
