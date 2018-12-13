@@ -401,14 +401,18 @@ namespace Console_Server.RabbitMQ
 
             Server_Send send_result;
             string result;
-            string city = information[1];
-            string country = information[2];
-            double longtitude = Double.Parse(information[3]);
-            double latitude = Double.Parse(information[4]);
+            double longtitude = Double.Parse(information[1]);
+            double latitude = Double.Parse(information[2]);
+            double altitude = Double.Parse(information[3]);
 
-            TableParkingPlace nearest = parking.FindNearest(city, country, longtitude, latitude);
+            TableParkingPlace nearest = parking.FindNearest(longtitude, latitude, altitude);
+            double part_distance;
+            double distance;
 
-            result = nearest.parking_name + "$$$" + nearest.longtitude + "$$$" + nearest.latitude + "$$$" + nearest.altitude;
+            part_distance = Math.Sqrt((nearest.longtitude * nearest.longtitude) + (nearest.latitude * nearest.latitude));
+            distance = Math.Sqrt((part_distance * part_distance) + (nearest.altitude * nearest.altitude));
+
+            result = nearest.parking_name + "$$$" + distance + "$$$" + nearest.longtitude + "$$$" + nearest.latitude + "$$$" + nearest.altitude;
 
             send_result = new Server_Send(information[5], result);
             send_result.SendMessage(args);

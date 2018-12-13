@@ -73,14 +73,13 @@ namespace Console_Server.Control
         /// <summary>
         /// This method finds the nearest parking place from a given location.
         /// </summary>
-        /// <param name="city"></param>
-        /// <param name="country"></param>
         /// <param name="longtitude"></param>
         /// <param name="latitude"></param>
+        /// <param name="altitude"></param>
         /// <returns>TableParkingPlace</returns>
-        public TableParkingPlace FindNearest(string city, string country, double longtitude, double latitude)
+        public TableParkingPlace FindNearest(double longtitude, double latitude, double altitude)
         {
-            return parking.FindNearestParking(city, country, longtitude, latitude);
+            return parking.FindNearestParking(longtitude, latitude, altitude);
         }
 
         /// <summary>

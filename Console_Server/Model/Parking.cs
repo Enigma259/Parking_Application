@@ -171,12 +171,11 @@ namespace Console_Server.Model
         /// <summary>
         /// This method finds the closest parking place.
         /// </summary>
-        /// <param name="city"></param>
-        /// <param name="country"></param>
         /// <param name="longtitude"></param>
         /// <param name="latitude"></param>
+        /// <param name="altitude"></param>
         /// <returns>TableParkingPlace</returns>
-        public TableParkingPlace FindNearestParking(string city, string country, double longtitude, double latitude)
+        public TableParkingPlace FindNearestParking(double longtitude, double latitude, double altitude)
         {
             List<TableParkingPlace> parking_places;
             TableParkingPlace current_parking;
@@ -185,31 +184,11 @@ namespace Console_Server.Model
             double shortest_distance;
             double current_longtitude;
             double current_latitude;
+            double current_altitude;
 
             try
             {
-                var list = from pp in db.TableParkingPlaces where pp.country == country select pp;
-                parking_places = list.ToList();
-
-                if (city != null && city != "")
-                {
-                    index = 0;
-
-                    while (index < parking_places.Count)
-                    {
-                        current_parking = parking_places[index];
-
-                        if (current_parking.city.Equals(city))
-                        {
-                            parking_places.Remove(current_parking);
-                        }
-
-                        else
-                        {
-                            index++;
-                        }
-                    }
-                }
+                parking_places = ListAllParkings();
 
                 index = 0;
                 current_parking = null;
@@ -218,6 +197,7 @@ namespace Console_Server.Model
                 {
                     current_longtitude = parking_place.longtitude - longtitude;
                     current_latitude = parking_place.latitude - latitude;
+                    current_altitude = parking_place.altitude - altitude;
 
                     if (current_longtitude < 0)
                     {
@@ -229,20 +209,25 @@ namespace Console_Server.Model
                         current_latitude = current_latitude * -1;
                     }
 
+                    if (current_altitude < 0)
+                    {
+                        current_altitude = current_altitude * -1;
+                    }
+
                     current_parking = parking_place;
 
                     if (index == 0)
                     {
                         
-                        shortest_distance = Math.Sqrt((current_longtitude * current_longtitude) + (current_latitude * current_latitude));
+                        shortest_distance = Math.Sqrt(Math.Sqrt((current_longtitude * current_longtitude) + (current_latitude * current_latitude)) + (current_altitude * current_altitude));
                         index++;
                     }
 
                     else
                     {
-                        current_distance = Math.Sqrt((current_longtitude * current_longtitude) + (current_latitude * current_latitude));
+                        current_distance = Math.Sqrt(Math.Sqrt((current_longtitude * current_longtitude) + (current_latitude * current_latitude)) + (current_altitude * current_altitude));
 
-                        if(current_distance < shortest_distance)
+                        if (current_distance < shortest_distance)
                         {
                             current_parking = parking_place;
                         }
