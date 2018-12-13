@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Device.Location;
 
-namespace Server.Model
+namespace Console_Server.Model
 {
     /// <summary>
     /// This is the class Location.

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
-namespace Server.RabbitMQ
+namespace Console_Server.RabbitMQ
 {
     /// <summary>
     /// This is the class Server_Receive.

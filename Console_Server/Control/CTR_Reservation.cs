@@ -5,7 +5,7 @@ using System.Web;
 using Server.Model;
 using Server.Database;
 
-namespace Server.Control
+namespace Console_Server.Control
 {
     /// <summary>
     /// This is the class CTR_Reservation.

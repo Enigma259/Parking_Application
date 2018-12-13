@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Server.Model
+namespace Console_Server.Model
 {
     /// <summary>
     /// This is the class ParkingStatistics.

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Server.Model;
 
-namespace Server.Control
+namespace Console_Server.Control
 {
     public sealed class CTR_ParkingStatistics
     {

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 
-namespace Server.RabbitMQ
+namespace Console_Server.RabbitMQ
 {
     /// <summary>
     /// This is the class Server_Receive.
