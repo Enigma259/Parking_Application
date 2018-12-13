@@ -9,7 +9,7 @@ namespace Console_Server.Model
     public sealed class ParkingStatistics
     {
         private static volatile ParkingStatistics _instance;
-        private static object syncRoot = new object();
+        private static readonly object syncRoot = new object();
 
         private int request_number;
 

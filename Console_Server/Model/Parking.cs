@@ -11,7 +11,7 @@ namespace Console_Server.Model
     public sealed class Parking
     {
         private static volatile Parking _instance;
-        private static object syncRoot = new object();
+        private static readonly object syncRoot = new object();
         private SQL_DatabaseDataContext db;
 
 

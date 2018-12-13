@@ -13,7 +13,7 @@ namespace Console_Server.Control
     public sealed class CTR_Reservation
     {
         private static volatile CTR_Reservation _instance;
-        private static object syncRoot = new object();
+        private static readonly object syncRoot = new object();
 
         private Reservation reservation;
         private CTR_Parking ctr_parking;

@@ -10,7 +10,7 @@ namespace Console_User.Model
     public sealed class Location
     {
         private static volatile Location _instance;
-        private static object syncRoot = new object();
+        private static readonly object syncRoot = new object();
         private double longtitude;
         private double latitude;
         private double altitude;

@@ -9,7 +9,7 @@ namespace Console_Server.Control
     public sealed class CTR_ParkingStatistics
     {
         private static volatile CTR_ParkingStatistics _instance;
-        private static object syncRoot = new object();
+        private static readonly object syncRoot = new object();
 
         private ParkingStatistics p_stats;
 

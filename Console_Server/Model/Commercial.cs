@@ -15,7 +15,7 @@ namespace Console_Server.Model
     public sealed class Commercial
     {
         private static volatile Commercial _instance;
-        private static object syncRoot = new object();
+        private static readonly object syncRoot = new object();
         private DateTime last_updated;
         private int update_sequence_seconds;
 

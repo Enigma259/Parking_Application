@@ -12,7 +12,7 @@ namespace Console_Server.Control
     public class CTR_Location
     {
         private static volatile CTR_Location _instance;
-        private static object syncRoot = new object();
+        private static readonly object syncRoot = new object();
 
         private Location location;
 
