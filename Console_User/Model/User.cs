@@ -18,7 +18,7 @@ namespace Console_User.Model
         private Location location;
 
         /// <summary>
-        /// 
+        /// This is the constructor for the class User.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="email"></param>
