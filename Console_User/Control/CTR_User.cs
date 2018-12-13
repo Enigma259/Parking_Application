@@ -13,7 +13,7 @@ namespace Console_User.Control
     public class CTR_User
     {
         private static volatile CTR_User _instance;
-        private static object syncRoot = new object();
+        private static readonly object syncRoot = new object();
         private User user;
 
         /// <summary>
@@ -55,8 +55,6 @@ namespace Console_User.Control
         public string UpdateUser(string name, string email, string mobile, string plate_number)
         {
             string result;
-            bool changed = false;
-
 
             if (!name.Equals(null) || !name.Equals(""))
             {
