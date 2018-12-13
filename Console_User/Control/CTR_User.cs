@@ -51,6 +51,10 @@ namespace Console_User.Control
         /// <returns></returns>
         public string UpdateUser(string name, string email, string mobile, string plate_number)
         {
+            string result;
+            bool changed = false;
+
+
             if (!name.Equals(null) || !name.Equals(""))
             {
                 user.SetName(name);
@@ -69,6 +73,16 @@ namespace Console_User.Control
             if (!plate_number.Equals(null) || !plate_number.Equals(""))
             {
                 user.SetPlateNumber(plate_number);
+            }
+
+            if(changed.Equals(true))
+            {
+                result = "Update complete";
+            }
+
+            else
+            {
+                result = "Nothing to change";
             }
         }
 
