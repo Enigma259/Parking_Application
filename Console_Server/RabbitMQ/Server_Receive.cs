@@ -412,7 +412,7 @@ namespace Console_Server.RabbitMQ
             part_distance = Math.Sqrt((nearest.longtitude * nearest.longtitude) + (nearest.latitude * nearest.latitude));
             distance = Math.Sqrt((part_distance * part_distance) + (nearest.altitude * nearest.altitude));
 
-            result = nearest.parking_name + "$$$" + distance + "$$$" + nearest.longtitude + "$$$" + nearest.latitude + "$$$" + nearest.altitude;
+            result = "Nearest Parking Place" + "$$$" + nearest.parking_name + "$$$" + distance + "$$$" + nearest.longtitude + "$$$" + nearest.latitude + "$$$" + nearest.altitude;
 
             send_result = new Server_Send(information[5], result);
             send_result.SendMessage(args);
@@ -435,7 +435,7 @@ namespace Console_Server.RabbitMQ
             string result;
             Server_Send send_result;
 
-            result = longtitude + "$$$" + lattitude + "$$$" + altitude;
+            result = "Get Location" + "$$$" + longtitude + "$$$" + lattitude + "$$$" + altitude;
 
             send_result = new Server_Send(information[1], result);
             send_result.SendMessage(args);
@@ -452,7 +452,7 @@ namespace Console_Server.RabbitMQ
             Server_Send send_result;
             int request_number = stats.GetRequestNumber();
 
-            string result = "" + request_number;
+            string result = "Get Request Number" + "$$$" + request_number;
 
             send_result = new Server_Send(information[1], result);
             send_result.SendMessage(args);
@@ -469,7 +469,7 @@ namespace Console_Server.RabbitMQ
             Server_Send send_result;
             int average = stats.GetAverage();
 
-            string result = "" + average;
+            string result = "Get Average Number" + "$$$" + average;
 
             send_result = new Server_Send(information[1], result);
             send_result.SendMessage(args);
@@ -491,7 +491,7 @@ namespace Console_Server.RabbitMQ
             DateTime end = DateTime.Parse(information[3]);
             int parking_id = int.Parse(information[4]);
 
-            result = reservation.Create(plate_number, start, end, parking_id);
+            result = "Create Reservation" + "$$$" + reservation.Create(plate_number, start, end, parking_id);
 
             send_result = new Server_Send(information[5], result);
             send_result.SendMessage(args);
@@ -514,7 +514,7 @@ namespace Console_Server.RabbitMQ
             DateTime end = DateTime.Parse(information[4]);
             int parking_id = int.Parse(information[5]);
 
-            result = reservation.Update(id, plate_number, start, end, parking_id);
+            result = "Update Reservation" + "$$$" + reservation.Update(id, plate_number, start, end, parking_id);
 
             send_result = new Server_Send(information[6], result);
             send_result.SendMessage(args);
@@ -534,7 +534,7 @@ namespace Console_Server.RabbitMQ
             int id = int.Parse(information[1]);
             string id_type = information[2];
 
-            result = reservation.Delete(id, id_type);
+            result = "Delete Reservation" + "$$$" + reservation.Delete(id, id_type);
 
             send_result = new Server_Send(information[3], result);
             send_result.SendMessage(args);
@@ -549,7 +549,7 @@ namespace Console_Server.RabbitMQ
             string result;
             Server_Send send_result;
 
-            result = " This feature is not available.";
+            result = "This feature is not available.";
 
             send_result = new Server_Send(information[1], result);
             send_result.SendMessage(args);
