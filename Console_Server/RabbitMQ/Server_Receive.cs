@@ -36,7 +36,7 @@ namespace Console_Server.RabbitMQ
         /// </summary>
         public Server_Receive()
         {
-            this.host_name = "localhost - Tasks";
+            this.host_name = "localhost - tasks";
             this.queue = "task_queue";
             this.durable = true;
             this.exclusive = false;

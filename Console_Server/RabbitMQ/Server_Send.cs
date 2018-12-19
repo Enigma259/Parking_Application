@@ -52,7 +52,7 @@ namespace Console_Server.RabbitMQ
         /// This method returns the value of the instance type.
         /// </summary>
         /// <returns></returns>
-        public string GetType()
+        public string GetRMQType()
         {
             return type;
         }
@@ -112,7 +112,7 @@ namespace Console_Server.RabbitMQ
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
-                channel.ExchangeDeclare(exchange: GetExcahnge(), type: GetType());
+                channel.ExchangeDeclare(exchange: GetExcahnge(), type: GetRMQType());
 
                 var severity = (args.Length > 0) ? args[0] : "info";
                 var message = (args.Length > 1) ? string.Join(" ", args.Skip(1).ToArray()) : GetMessage();
