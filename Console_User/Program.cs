@@ -83,7 +83,14 @@ namespace Console_User
                     break;
 
                 case "4": //Get Average Number
-                    //some code here;
+                    Console.WriteLine("Here is the request number: ");
+
+                    server_message += "Get Average Number" + splitter + user.GetUser().GetPlateNumber();
+
+                    send_message.SetMessage(server_message);
+                    send_message.NewTask(args);
+
+                    receive_message.ReceiveMessage(args);
                     break;
 
                 case "5": //Create Reservation
