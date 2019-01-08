@@ -12,7 +12,7 @@ namespace Console_User
     {
         private static CTR_User user;
         private User_Send send_message;
-        private User_Receive receive_message;
+        private static User_Receive receive_message;
         private int requests_sent = 0;
 
         static void Main(string[] args)
@@ -31,18 +31,38 @@ namespace Console_User
 
             user = CTR_User.GetInstance(name, email, mobile, plate_number);
             Console.ReadLine();
+
+            receive_message = User_Receive.GetInstance(plate_number);
         }
 
-        public void Inputs(string input)
+        public void Inputs(string[] args, string input)
         {
+            send_message = User_Send.GetInstance("");
+            receive_message = User_Receive.GetInstance(user.GetUser().GetPlateNumber());
+
+            string server_message = "";
+            string splitter = "$$$";
+
             switch(input)
             {
                 case "1": //Nearest Parking Place
-                    //some code here;
+                    Console.WriteLine("Here is the nearest parking place: ");
+                    server_message += "Get Neareest Parking Place" + splitter;
+                    user.GetUser().UpdateLocation();
+                    server_message += user.GetUser().GetLocation().GetLongtitude() + splitter;
+                    server_message += user.GetUser().GetLocation().GetLatitude() + splitter;
+                    server_message += user.GetUser().GetLocation().GetAltitude() + splitter;
+                    server_message += user.GetUser().GetPlateNumber();
+
+                    send_message.SetMessage(server_message);
+                    send_message.NewTask(args);
+
+                    receive_message.ReceiveMessage(args);
+
                     break;
 
                 case "2": //Get Location
-                    Console.WriteLine("Here us your location: ");
+                    Console.WriteLine("Here is your location: ");
                     user.GetUser().UpdateLocation();
                     double longtitude = user.GetUser().GetLocation().GetLongtitude();
                     double latitude = user.GetUser().GetLocation().GetLatitude();
