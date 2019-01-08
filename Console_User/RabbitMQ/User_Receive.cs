@@ -222,8 +222,9 @@ namespace Console_User.RabbitMQ
         /// 
         /// </summary>
         /// <param name="information"></param>
-        public void PrintMessage(List<string> information)
+        public bool PrintMessage(List<string> information)
         {
+            bool message_received;
             switch (information[0])
             {
                 case "Nearest Parking Place":
@@ -234,42 +235,52 @@ namespace Console_User.RabbitMQ
                     Console.WriteLine(information[2]);
                     Console.WriteLine("Location: ");
                     Console.WriteLine(information[3] + ", " + information[4] + ", " + information[5]);
+                    message_received = true;
                     break;
 
                 case "Get Location":
                     Console.WriteLine("Location: ");
                     Console.WriteLine(information[1] + ", " + information[2] + ", " + information[3]);
+                    message_received = true;
                     break;
 
                 case "Get Request Number":
                     Console.WriteLine("Request number: ");
                     Console.WriteLine(information[1]);
+                    message_received = true;
                     break;
 
                 case "Get Average Number":
                     Console.WriteLine("Average number: ");
                     Console.WriteLine(information[1]);
+                    message_received = true;
                     break;
 
                 case "Create Reservation":
                     Console.WriteLine("Create Reservation status: ");
                     Console.WriteLine(information[1]);
+                    message_received = true;
                     break;
 
                 case "Update Reservation":
                     Console.WriteLine("Update Reservation status: ");
                     Console.WriteLine(information[1]);
+                    message_received = true;
                     break;
 
                 case "Delete Reservation":
                     Console.WriteLine("Delete Reservation status: ");
                     Console.WriteLine(information[1]);
+                    message_received = true;
                     break;
 
                 default:
                     Console.WriteLine(information[0]);
+                    message_received = false;
                     break;
             }
+
+            return message_received;
         }
     }
 }

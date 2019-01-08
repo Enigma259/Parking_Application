@@ -13,6 +13,7 @@ namespace Console_User
         private static CTR_User user;
         private User_Send send_message;
         private User_Receive receive_message;
+        private int requests_sent = 0;
 
         static void Main(string[] args)
         {
