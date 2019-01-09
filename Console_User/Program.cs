@@ -162,7 +162,21 @@ namespace Console_User
                     break;
 
                 case "7": //Delete Reservation
-                    //some code here;
+                    int delete_id;
+                    string delete_id_type;
+
+                    Console.WriteLine("what is the parking id?");
+                    delete_id = Convert.ToInt32(Console.ReadLine());
+
+                    Console.WriteLine("what is the id type?");
+                    delete_id_type = Console.ReadLine();
+
+                    server_message = "Update Reservation" + splitter + delete_id + splitter + delete_id_type + splitter + user.GetUser().GetPlateNumber();
+
+                    send_message.SetMessage(server_message);
+                    send_message.NewTask(args);
+
+                    receive_message.ReceiveMessage(args);
                     break;
 
                 default:
