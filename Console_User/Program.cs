@@ -8,6 +8,9 @@ using Console_User.RabbitMQ;
 
 namespace Console_User
 {
+    /// <summary>
+    /// This is the class Program.
+    /// </summary>
     class Program
     {
         private static CTR_User user;
@@ -15,6 +18,10 @@ namespace Console_User
         private static User_Receive receive_message;
         private int requests_sent = 0;
 
+        /// <summary>
+        /// This method is where the program starts.
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             Console.WriteLine("What is your name?");
@@ -35,6 +42,11 @@ namespace Console_User
             receive_message = User_Receive.GetInstance(plate_number);
         }
 
+        /// <summary>
+        /// This method gets the user input and gets the information that the input requires.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <param name="input"></param>
         public void Inputs(string[] args, string input)
         {
             send_message = User_Send.GetInstance("");
@@ -47,7 +59,7 @@ namespace Console_User
             {
                 case "1": //Nearest Parking Place
                     Console.WriteLine("Here is the nearest parking place: ");
-                    server_message += "Get Neareest Parking Place" + splitter;
+                    server_message = "Get Neareest Parking Place" + splitter;
                     user.GetUser().UpdateLocation();
                     server_message += user.GetUser().GetLocation().GetLongtitude() + splitter;
                     server_message += user.GetUser().GetLocation().GetLatitude() + splitter;
@@ -74,7 +86,7 @@ namespace Console_User
                 case "3": //Get Request Number
                     Console.WriteLine("Here is the request number: ");
 
-                    server_message += "Get Request Number" + splitter + user.GetUser().GetPlateNumber();
+                    server_message = "Get Request Number" + splitter + user.GetUser().GetPlateNumber();
 
                     send_message.SetMessage(server_message);
                     send_message.NewTask(args);
@@ -85,7 +97,7 @@ namespace Console_User
                 case "4": //Get Average Number
                     Console.WriteLine("Here is the request number: ");
 
-                    server_message += "Get Average Number" + splitter + user.GetUser().GetPlateNumber();
+                    server_message = "Get Average Number" + splitter + user.GetUser().GetPlateNumber();
 
                     send_message.SetMessage(server_message);
                     send_message.NewTask(args);
@@ -94,7 +106,30 @@ namespace Console_User
                     break;
 
                 case "5": //Create Reservation
-                    //some code here;
+                    string plate_number;
+                    DateTime start;
+                    DateTime end;
+                    double minutes;
+                    int parking_id;
+
+                    plate_number = user.GetUser().GetPlateNumber();
+                    start = DateTime.Now;
+                    end = start;
+                    
+                    Console.WriteLine("How long time will you be parked? - in minutes");
+                    minutes = Convert.ToDouble(Console.ReadLine());
+                    end.AddMinutes(minutes);
+
+                    Console.WriteLine("what is the parking id?");
+                    parking_id = Convert.ToInt32(Console.ReadLine());
+
+                    server_message = "Create Reservation" + splitter + plate_number + splitter + start + splitter + end + splitter + parking_id + splitter + plate_number;
+
+                    send_message.SetMessage(server_message);
+                    send_message.NewTask(args);
+
+                    receive_message.ReceiveMessage(args);
+
                     break;
 
                 case "6": //Update Reservation
