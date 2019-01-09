@@ -106,34 +106,59 @@ namespace Console_User
                     break;
 
                 case "5": //Create Reservation
-                    string plate_number;
-                    DateTime start;
-                    DateTime end;
-                    double minutes;
-                    int parking_id;
+                    string create_plate_number;
+                    DateTime create_start;
+                    DateTime create_end;
+                    double create_minutes;
+                    int create_parking_id;
 
-                    plate_number = user.GetUser().GetPlateNumber();
-                    start = DateTime.Now;
-                    end = start;
+                    create_plate_number = user.GetUser().GetPlateNumber();
+                    create_start = DateTime.Now;
+                    create_end = create_start;
                     
                     Console.WriteLine("How long time will you be parked? - in minutes");
-                    minutes = Convert.ToDouble(Console.ReadLine());
-                    end.AddMinutes(minutes);
+                    create_minutes = Convert.ToDouble(Console.ReadLine());
+                    create_end.AddMinutes(create_minutes);
 
                     Console.WriteLine("what is the parking id?");
-                    parking_id = Convert.ToInt32(Console.ReadLine());
+                    create_parking_id = Convert.ToInt32(Console.ReadLine());
 
-                    server_message = "Create Reservation" + splitter + plate_number + splitter + start + splitter + end + splitter + parking_id + splitter + plate_number;
+                    server_message = "Create Reservation" + splitter + create_plate_number + splitter + create_start + splitter + create_end + splitter + create_parking_id + splitter + create_plate_number;
 
                     send_message.SetMessage(server_message);
                     send_message.NewTask(args);
 
                     receive_message.ReceiveMessage(args);
-
                     break;
 
                 case "6": //Update Reservation
-                    //some code here;
+                    int update_id;
+                    string update_plate_number;
+                    DateTime update_start;
+                    DateTime update_end;
+                    double update_minutes;
+                    int update_parking_id;
+
+                    update_plate_number = user.GetUser().GetPlateNumber();
+                    update_start = DateTime.Now;
+                    update_end = update_start;
+
+                    Console.WriteLine("what is the parking id?");
+                    update_id = Convert.ToInt32(Console.ReadLine());
+
+                    Console.WriteLine("How long time will you be parked? - in minutes");
+                    update_minutes = Convert.ToDouble(Console.ReadLine());
+                    update_end.AddMinutes(update_minutes);
+
+                    Console.WriteLine("what is the parking id?");
+                    update_parking_id = Convert.ToInt32(Console.ReadLine());
+
+                    server_message = "Update Reservation" + splitter + update_id + splitter + update_plate_number + splitter + update_start + splitter + update_end + splitter + update_parking_id + splitter + update_plate_number;
+
+                    send_message.SetMessage(server_message);
+                    send_message.NewTask(args);
+
+                    receive_message.ReceiveMessage(args);
                     break;
 
                 case "7": //Delete Reservation
