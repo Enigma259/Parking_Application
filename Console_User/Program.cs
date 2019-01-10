@@ -14,7 +14,7 @@ namespace Console_User
     class Program
     {
         private static CTR_User user;
-        private User_Send send_message;
+        private static User_Send send_message;
         private static User_Receive receive_message;
         private int requests_sent = 0;
 
@@ -23,6 +23,34 @@ namespace Console_User
         /// </summary>
         /// <param name="args"></param>
         static void Main(string[] args)
+        {
+            UserInfo();
+            Choices(args);
+        }
+
+        public static void Choices(string[] args)
+        {
+            string number = "";
+            bool quit = true;
+
+            while (number != "-5")
+            {
+                Console.WriteLine("1 - find nearest parking place.");
+                Console.WriteLine("2 - Get your location.");
+                Console.WriteLine("3 - get request number.");
+                Console.WriteLine("4 - Get average number.");
+                Console.WriteLine("5 - Create reservation.");
+                Console.WriteLine("6 - Update reservation.");
+                Console.WriteLine("7 - Delete reservation.");
+
+                number = Console.ReadLine();
+
+                Inputs(args, number);
+            }
+        }
+
+
+        public static void UserInfo()
         {
             Console.WriteLine("What is your name?");
             string name = Console.ReadLine();
@@ -47,7 +75,7 @@ namespace Console_User
         /// </summary>
         /// <param name="args"></param>
         /// <param name="input"></param>
-        public void Inputs(string[] args, string input)
+        public static void Inputs(string[] args, string input)
         {
             send_message = User_Send.GetInstance("");
             receive_message = User_Receive.GetInstance(user.GetUser().GetPlateNumber());
@@ -179,7 +207,7 @@ namespace Console_User
                     receive_message.ReceiveMessage(args);
                     break;
 
-                default:
+                default: //default case
                     Console.WriteLine("Invalid input");
                     break;
             }
