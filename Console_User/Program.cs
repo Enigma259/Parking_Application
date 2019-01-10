@@ -31,7 +31,6 @@ namespace Console_User
         public static void Choices(string[] args)
         {
             string number = "";
-            bool quit = true;
 
             while (number != "-5")
             {

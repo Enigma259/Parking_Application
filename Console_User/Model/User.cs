@@ -76,8 +76,6 @@ namespace Console_User.Model
         /// <returns></returns>
         public Location GetLocation()
         {
-            UpdateLocation();
-
             return location;
         }
 
