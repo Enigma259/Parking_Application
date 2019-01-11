@@ -28,6 +28,10 @@ namespace Console_User
             Choices(args);
         }
 
+        /// <summary>
+        /// This method prints the choices and read what the user choose.
+        /// </summary>
+        /// <param name="args"></param>
         public static void Choices(string[] args)
         {
             string number = "";
@@ -48,7 +52,9 @@ namespace Console_User
             }
         }
 
-
+        /// <summary>
+        /// this method gets the user information.
+        /// </summary>
         public static void UserInfo()
         {
             Console.WriteLine("What is your name?");
