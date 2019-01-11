@@ -125,7 +125,7 @@ namespace Console_User.Model
         }
 
         /// <summary>
-        /// 
+        /// This method updates the location of the user.
         /// </summary>
         public void UpdateLocation()
         {
