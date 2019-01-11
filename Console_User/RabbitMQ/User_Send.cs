@@ -63,7 +63,7 @@ namespace Console_User.RabbitMQ
         /// <summary>
         /// This method returns the value of the instance host_name.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public string GetHostName()
         {
             return host_name;
@@ -72,7 +72,7 @@ namespace Console_User.RabbitMQ
         /// <summary>
         /// This method returns the value of the instance queue.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public string GetQueue()
         {
             return queue;
@@ -81,7 +81,7 @@ namespace Console_User.RabbitMQ
         /// <summary>
         /// This method returns the value of the instance durable.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bool</returns>
         public bool GetDurable()
         {
             return durable;
@@ -90,7 +90,7 @@ namespace Console_User.RabbitMQ
         /// <summary>
         /// This method returns the value of the instance exclusive.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bool</returns>
         public bool GetExclusive()
         {
             return exclusive;
@@ -99,7 +99,7 @@ namespace Console_User.RabbitMQ
         /// <summary>
         /// This method returns the value of the instance auto_delete.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bool</returns>
         public bool GetAutoDelete()
         {
             return auto_delete;
@@ -108,7 +108,7 @@ namespace Console_User.RabbitMQ
         /// <summary>
         /// This method returns the value of the instance arguments.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>IDictionary<string, object></returns>
         public IDictionary<string, object> GetArguments()
         {
             return arguments;
@@ -117,7 +117,7 @@ namespace Console_User.RabbitMQ
         /// <summary>
         /// This method returns the value of the instance message.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public string GetMessage()
         {
             return message;
@@ -126,7 +126,7 @@ namespace Console_User.RabbitMQ
         /// <summary>
         /// This method returns the value of the instance persistent.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bool</returns>
         public bool GetPersistent()
         {
             return persistent;
@@ -135,7 +135,7 @@ namespace Console_User.RabbitMQ
         /// <summary>
         /// This method returns the value of the instance exchange.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public string GetExchange()
         {
             return exchange;
@@ -144,7 +144,7 @@ namespace Console_User.RabbitMQ
         /// <summary>
         /// This method returns the value of the instance routing_key.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public string GetRoutingKey()
         {
             return routing_key;
