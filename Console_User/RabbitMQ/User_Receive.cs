@@ -8,6 +8,9 @@ using RabbitMQ.Client.Events;
 
 namespace Console_User.RabbitMQ
 {
+    /// <summary>
+    /// This is the class User_Receive.
+    /// </summary>
     public sealed class User_Receive
     {
         private static volatile User_Receive _instance;
@@ -50,43 +53,43 @@ namespace Console_User.RabbitMQ
         }
 
         /// <summary>
-        /// 
+        /// This method returns the value of the instance host_name.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public string GetHostName()
         {
             return host_name;
         }
 
         /// <summary>
-        /// 
+        /// This method returns the value of the instance exchange.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public string GetExchange()
         {
             return exchange;
         }
 
         /// <summary>
-        /// 
+        /// This method returns the value of the instance type.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public string GetRMQType()
         {
             return type;
         }
 
         /// <summary>
-        /// 
+        /// This method returns the value of the instance autoAck.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>bool</returns>
         public bool GetAutoAck()
         {
             return autoAck;
         }
 
         /// <summary>
-        /// 
+        /// This method changes the value of the instance host_name.
         /// </summary>
         /// <param name="host_name"></param>
         public void SetHostName(string host_name)
@@ -95,7 +98,7 @@ namespace Console_User.RabbitMQ
         }
 
         /// <summary>
-        /// 
+        /// This method changes the value of the instance exchange.
         /// </summary>
         /// <param name="exchange"></param>
         public void SetExchange(string exchange)
@@ -104,7 +107,7 @@ namespace Console_User.RabbitMQ
         }
 
         /// <summary>
-        /// 
+        /// This method changes the value of the instance type.
         /// </summary>
         /// <param name="type"></param>
         public void SetType(string type)
@@ -113,7 +116,7 @@ namespace Console_User.RabbitMQ
         }
 
         /// <summary>
-        /// 
+        /// This method changes the value of the instance autoAck.
         /// </summary>
         /// <param name="autoAck"></param>
         public void SetAutoAck(bool autoAck)
@@ -122,7 +125,7 @@ namespace Console_User.RabbitMQ
         }
 
         /// <summary>
-        /// 
+        /// This method receives a message from the server.
         /// </summary>
         /// <param name="args"></param>
         public void ReceiveMessage(string[] args)
@@ -169,7 +172,7 @@ namespace Console_User.RabbitMQ
         }
 
         /// <summary>
-        /// 
+        /// This method takes the message from the server and split it up.
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
@@ -219,7 +222,7 @@ namespace Console_User.RabbitMQ
         }
 
         /// <summary>
-        /// 
+        /// This method takes the splitted message and print it.
         /// </summary>
         /// <param name="information"></param>
         public bool PrintMessage(List<string> information)
