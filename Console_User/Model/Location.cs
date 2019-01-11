@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Console_User.Model
 {
+    /// <summary>
+    /// This is the class Location.
+    /// </summary>
     public sealed class Location
     {
         private static volatile Location _instance;
