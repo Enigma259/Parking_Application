@@ -6,6 +6,9 @@ using Console_Server.Model;
 
 namespace Console_Server.Control
 {
+    /// <summary>
+    /// Ths is the class CTR_ParkingStatistics.
+    /// </summary>
     public sealed class CTR_ParkingStatistics
     {
         private static volatile CTR_ParkingStatistics _instance;
