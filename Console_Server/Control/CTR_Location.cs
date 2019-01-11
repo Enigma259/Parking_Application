@@ -43,23 +43,38 @@ namespace Console_Server.Control
 
             return _instance;
         }
-
-
+        
+        /// <summary>
+        /// This method gets the longtitude value.
+        /// </summary>
+        /// <returns>double</returns>
         public double GetLongtitude()
         {
             return location.GetLongtitude();
         }
 
+        /// <summary>
+        /// This method gets the latitude value.
+        /// </summary>
+        /// <returns>double</returns>
         public double GetLatitude()
         {
             return location.GetLatitude();
         }
 
+        /// <summary>
+        /// This method gets the altitude value.
+        /// </summary>
+        /// <returns>double</returns>
         public double GetAltitude()
         {
             return location.GetAltitude();
         }
-        
+
+        /// <summary>
+        /// This method changes the location
+        /// </summary>
+        /// <returns>string</returns>
         public string SetLocation()
         {
             return location.SetLocation();  
