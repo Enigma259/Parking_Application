@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace Console_Server.Model
 {
     /// <summary>
-    /// 
+    /// This is the class Reservation.
     /// </summary>
     public sealed class Reservation
     {
