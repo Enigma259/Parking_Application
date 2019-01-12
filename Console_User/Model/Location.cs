@@ -131,9 +131,11 @@ namespace Console_User.Model
 
             watcher.TryStart(false, TimeSpan.FromMilliseconds(milliseconds));
 
+            //have to wait so the instance "watcher" can get the location.
             System.Threading.Thread.Sleep(milliseconds);
 
             GeoCoordinate coordinates = watcher.Position.Location;
+            watcher.Stop();
 
             if (coordinates.Longitude.ToString() != "NaN")
             {

@@ -45,6 +45,7 @@ namespace Console_User
                 Console.WriteLine("5 - Create reservation.");
                 Console.WriteLine("6 - Update reservation.");
                 Console.WriteLine("7 - Delete reservation.");
+                Console.WriteLine("8 - Close program.");
 
                 number = Console.ReadLine();
 
@@ -211,6 +212,11 @@ namespace Console_User
                     send_message.NewTask(args);
 
                     receive_message.ReceiveMessage(args);
+                    break;
+
+                case "8": //Close program
+                    Environment.Exit(0);
+
                     break;
 
                 default: //default case
