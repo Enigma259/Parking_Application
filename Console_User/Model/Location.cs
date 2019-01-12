@@ -128,20 +128,34 @@ namespace Console_User.Model
             GeoCoordinateWatcher watcher = new GeoCoordinateWatcher();
             GeoCoordinate coordinates = watcher.Position.Location;
 
-            if (coordinates != null)
+            if (coordinates.Longitude.ToString() != "NaN")
             {
                 SetLongtitude(coordinates.Longitude);
-                SetLatitude(coordinates.Latitude);
-                SetAltitude(coordinates.Altitude);
-                SetLocationSuccess(true);
             }
 
             else
             {
                 SetLongtitude(0.0);
+            }
+
+            if (coordinates.Latitude.ToString() != "NaN")
+            {
+                SetLatitude(coordinates.Latitude);
+            }
+
+            else
+            {
                 SetLatitude(0.0);
+            }
+
+            if (coordinates.Altitude.ToString() != "NaN")
+            {
+                SetAltitude(coordinates.Altitude);
+            }
+
+            else
+            {
                 SetAltitude(0.0);
-                SetLocationSuccess(false);
             }
         }
     }
