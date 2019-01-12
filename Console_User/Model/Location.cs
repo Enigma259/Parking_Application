@@ -125,7 +125,14 @@ namespace Console_User.Model
         /// <returns></returns>
         public void SetLocation()
         {
+            int milliseconds = 1000;
+
             GeoCoordinateWatcher watcher = new GeoCoordinateWatcher();
+
+            watcher.TryStart(false, TimeSpan.FromMilliseconds(milliseconds));
+
+            System.Threading.Thread.Sleep(milliseconds);
+
             GeoCoordinate coordinates = watcher.Position.Location;
 
             if (coordinates.Longitude.ToString() != "NaN")

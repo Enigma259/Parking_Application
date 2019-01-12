@@ -109,6 +109,7 @@ namespace Console_User
                 case "2": //Get Location
                     Console.WriteLine("Here is your location: ");
                     user.GetUser().UpdateLocation();
+
                     double longtitude = user.GetUser().GetLocation().GetLongtitude();
                     double latitude = user.GetUser().GetLocation().GetLatitude();
                     double altitude = user.GetUser().GetLocation().GetAltitude();
