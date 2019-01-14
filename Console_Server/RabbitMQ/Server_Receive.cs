@@ -40,8 +40,8 @@ namespace Console_Server.RabbitMQ
         public Server_Receive()
         {
             this.host_name = "localhost - tasks";
-            this.user = "guest";
-            this.password = "guest";
+            this.user = "serverUser";
+            this.password = "123456789";
             this.virtuel_host = "/";
             this.queue = "task_queue";
             this.durable = true;
@@ -323,7 +323,8 @@ namespace Console_Server.RabbitMQ
                 HostName = GetHostName(),
                 UserName = GetUser(),
                 Password = GetPassword(),
-                VirtualHost = GetVirtuelHost()
+                VirtualHost = GetVirtuelHost(),
+                RequestedHeartbeat = 60
             };
 
             using (var connection = factory.CreateConnection())

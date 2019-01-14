@@ -27,8 +27,8 @@ namespace Console_User.RabbitMQ
         private User_Receive(string type)
         {
             this.host_name = "localhost - user";
-            this.user = "guest";
-            this.password = "guest";
+            this.user = "serverUser";
+            this.password = "123456789";
             this.virtuel_host = "/";
             this.exchange = "direct_logs";
             this.type = type;
@@ -195,7 +195,8 @@ namespace Console_User.RabbitMQ
                 HostName = GetHostName(),
                 UserName = GetUser(),
                 Password = GetPassword(),
-                VirtualHost = GetVirtuelHost()
+                VirtualHost = GetVirtuelHost(),
+                RequestedHeartbeat = 60
             };
 
             using (var connection = factory.CreateConnection())

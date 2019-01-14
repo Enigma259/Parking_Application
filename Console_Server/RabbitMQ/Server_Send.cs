@@ -28,8 +28,8 @@ namespace Console_Server.RabbitMQ
         public Server_Send(string type, string message)
         {
             this.host_name = "localhost - User";
-            this.user = "guest";
-            this.password = "/";
+            this.user = "serverUser";
+            this.password = "123456789";
             this.virtuel_host = "/";
             this.excahnge = "direct_logs";
             this.type = type;
@@ -173,7 +173,8 @@ namespace Console_Server.RabbitMQ
                 HostName = GetHostName(),
                 UserName = GetUser(),
                 Password = GetPassword(),
-                VirtualHost = GetVirtuelHost()
+                VirtualHost = GetVirtuelHost(),
+                RequestedHeartbeat = 60
             };
 
             using (var connection = factory.CreateConnection())
