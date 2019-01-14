@@ -29,7 +29,7 @@ namespace Console_Server.RabbitMQ
         {
             this.host_name = "localhost - User";
             this.user = "guest";
-            this.password = "guest";
+            this.password = "/";
             this.virtuel_host = "/";
             this.excahnge = "direct_logs";
             this.type = type;
@@ -40,7 +40,7 @@ namespace Console_Server.RabbitMQ
         /// This method returns the value of the instance host_name.
         /// </summary>
         /// <returns></returns>
-        public string GethostName()
+        public string GetHostName()
         {
             return host_name;
         }
@@ -168,7 +168,14 @@ namespace Console_Server.RabbitMQ
         /// <param name="args"></param>
         public void SendMessage(string[] args)
         {
-            var factory = new ConnectionFactory() { HostName = GethostName() };
+            var factory = new ConnectionFactory()
+            {
+                HostName = GetHostName(),
+                UserName = GetUser(),
+                Password = GetPassword(),
+                VirtualHost = GetVirtuelHost()
+            };
+
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {

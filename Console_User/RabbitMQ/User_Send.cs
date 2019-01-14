@@ -308,7 +308,10 @@ namespace Console_User.RabbitMQ
         {
             var factory = new ConnectionFactory()
             {
-                HostName = GetHostName()
+                HostName = GetHostName(),
+                UserName = GetUser(),
+                Password = GetPassword(),
+                VirtualHost = GetVirtuelHost()
             };
 
             using (var connection = factory.CreateConnection())
