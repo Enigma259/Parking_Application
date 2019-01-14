@@ -13,6 +13,9 @@ namespace Console_Server.RabbitMQ
     public class Server_Send
     {
         private string host_name;
+        private string user;
+        private string password;
+        private string virtuel_host;
         private string excahnge;
         private string type;
         private string message;
@@ -25,6 +28,9 @@ namespace Console_Server.RabbitMQ
         public Server_Send(string type, string message)
         {
             this.host_name = "localhost - User";
+            this.user = "guest";
+            this.password = "guest";
+            this.virtuel_host = "??????????";
             this.excahnge = "direct_logs";
             this.type = type;
             this.message = message;
@@ -37,6 +43,33 @@ namespace Console_Server.RabbitMQ
         public string GethostName()
         {
             return host_name;
+        }
+
+        /// <summary>
+        /// This method returns the value of the instance user.
+        /// </summary>
+        /// <returns>string</returns>
+        public string GetUser()
+        {
+            return user;
+        }
+
+        /// <summary>
+        /// This method returns the value of the instance password.
+        /// </summary>
+        /// <returns>string</returns>
+        public string GetPassword()
+        {
+            return password;
+        }
+
+        /// <summary>
+        /// This method returns the value of the instance virtuel_host.
+        /// </summary>
+        /// <returns>string</returns>
+        public string GetVirtuelHost()
+        {
+            return virtuel_host;
         }
 
         /// <summary>
@@ -73,6 +106,33 @@ namespace Console_Server.RabbitMQ
         public void SethostName(string host_name)
         {
             this.host_name = host_name;
+        }
+
+        /// <summary>
+        /// This method changes the value of the instance user.
+        /// </summary>
+        /// <param name="user"></param>
+        public void SetUser(string user)
+        {
+            this.user = user;
+        }
+
+        /// <summary>
+        /// This method changes the value of the instance password.
+        /// </summary>
+        /// <param name="password"></param>
+        public void SetPassword(string password)
+        {
+            this.password = password;
+        }
+
+        /// <summary>
+        /// This method changes the value of the instance virtuel_host.
+        /// </summary>
+        /// <param name="virtuel_host"></param>
+        public void SetVirtuelHost(string virtuel_host)
+        {
+            this.virtuel_host = virtuel_host;
         }
 
         /// <summary>

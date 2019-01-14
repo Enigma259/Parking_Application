@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RabbitMQ.Client;
+﻿using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Console_User.RabbitMQ
 {
@@ -16,6 +14,9 @@ namespace Console_User.RabbitMQ
         private static volatile User_Receive _instance;
         private static readonly object syncRoot = new object();
         private string host_name;
+        private string user;
+        private string password;
+        private string virtuel_host;
         private string exchange;
         private string type;
         private bool autoAck;
@@ -26,6 +27,9 @@ namespace Console_User.RabbitMQ
         private User_Receive(string type)
         {
             this.host_name = "localhost - user";
+            this.user = "guest";
+            this.password = "guest";
+            this.virtuel_host = "??????????";
             this.exchange = "direct_logs";
             this.type = type;
             this.autoAck = true;
@@ -59,6 +63,33 @@ namespace Console_User.RabbitMQ
         public string GetHostName()
         {
             return host_name;
+        }
+
+        /// <summary>
+        /// This method returns the value of the instance user.
+        /// </summary>
+        /// <returns>string</returns>
+        public string GetUser()
+        {
+            return user;
+        }
+
+        /// <summary>
+        /// This method returns the value of the instance password.
+        /// </summary>
+        /// <returns>string</returns>
+        public string GetPassword()
+        {
+            return password;
+        }
+
+        /// <summary>
+        /// This method returns the value of the instance virtuel_host.
+        /// </summary>
+        /// <returns>string</returns>
+        public string GetVirtuelHost()
+        {
+            return virtuel_host;
         }
 
         /// <summary>
@@ -98,6 +129,33 @@ namespace Console_User.RabbitMQ
         }
 
         /// <summary>
+        /// This method changes the value of the instance user.
+        /// </summary>
+        /// <param name="user"></param>
+        public void SetUser(string user)
+        {
+            this.user = user;
+        }
+
+        /// <summary>
+        /// This method changes the value of the instance password.
+        /// </summary>
+        /// <param name="password"></param>
+        public void SetPassword(string password)
+        {
+            this.password = password;
+        }
+
+        /// <summary>
+        /// This method changes the value of the instance virtuel_host.
+        /// </summary>
+        /// <param name="virtuel_host"></param>
+        public void SetVirtuelHost(string virtuel_host)
+        {
+            this.virtuel_host = virtuel_host;
+        }
+
+        /// <summary>
         /// This method changes the value of the instance exchange.
         /// </summary>
         /// <param name="exchange"></param>
@@ -132,7 +190,11 @@ namespace Console_User.RabbitMQ
         {
             List<string> information;
 
-            var factory = new ConnectionFactory() { HostName = GetHostName() };
+            var factory = new ConnectionFactory()
+            {
+                HostName = GetHostName()
+            };
+
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {

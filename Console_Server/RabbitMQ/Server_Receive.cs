@@ -15,6 +15,9 @@ namespace Console_Server.RabbitMQ
     public class Server_Receive
     {
         private string host_name;
+        private string user;
+        private string password;
+        private string virtuel_host;
         private string queue;
         private bool durable;
         private bool exclusive;
@@ -37,6 +40,9 @@ namespace Console_Server.RabbitMQ
         public Server_Receive()
         {
             this.host_name = "localhost - tasks";
+            this.user = "guest";
+            this.password = "guest";
+            this.virtuel_host = "??????????";
             this.queue = "task_queue";
             this.durable = true;
             this.exclusive = false;
@@ -61,6 +67,33 @@ namespace Console_Server.RabbitMQ
         public string GetHostName()
         {
             return host_name;
+        }
+
+        /// <summary>
+        /// This method returns the value of the instance user.
+        /// </summary>
+        /// <returns>string</returns>
+        public string GetUser()
+        {
+            return user;
+        }
+
+        /// <summary>
+        /// This method returns the value of the instance password.
+        /// </summary>
+        /// <returns>string</returns>
+        public string GetPassword()
+        {
+            return password;
+        }
+
+        /// <summary>
+        /// This method returns the value of the instance virtuel_host.
+        /// </summary>
+        /// <returns>string</returns>
+        public string GetVirtuelHost()
+        {
+            return virtuel_host;
         }
 
         /// <summary>
@@ -163,6 +196,33 @@ namespace Console_Server.RabbitMQ
         }
 
         /// <summary>
+        /// This method changes the value of the instance user.
+        /// </summary>
+        /// <param name="user"></param>
+        public void SetUser(string user)
+        {
+            this.user = user;
+        }
+
+        /// <summary>
+        /// This method changes the value of the instance password.
+        /// </summary>
+        /// <param name="password"></param>
+        public void SetPassword(string password)
+        {
+            this.password = password;
+        }
+
+        /// <summary>
+        /// This method changes the value of the instance virtuel_host.
+        /// </summary>
+        /// <param name="virtuel_host"></param>
+        public void SetVirtuelHost(string virtuel_host)
+        {
+            this.virtuel_host = virtuel_host;
+        }
+
+        /// <summary>
         /// This method changes the value of the instance queue.
         /// </summary>
         /// <param name="queue"></param>
@@ -258,7 +318,11 @@ namespace Console_Server.RabbitMQ
         /// <param name="args"></param>
         public void ReceiveMessage(string[] args)
         {
-            var factory = new ConnectionFactory() { HostName = GetHostName() };
+            var factory = new ConnectionFactory()
+            {
+                HostName = GetHostName()
+            };
+
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
