@@ -38,6 +38,7 @@ namespace Console_User
 
             while (number != "-5")
             {
+                Console.WriteLine("0 - Close program.");
                 Console.WriteLine("1 - find nearest parking place.");
                 Console.WriteLine("2 - Get your location.");
                 Console.WriteLine("3 - get request number.");
@@ -45,7 +46,6 @@ namespace Console_User
                 Console.WriteLine("5 - Create reservation.");
                 Console.WriteLine("6 - Update reservation.");
                 Console.WriteLine("7 - Delete reservation.");
-                Console.WriteLine("8 - Close program.");
 
                 number = Console.ReadLine();
 
@@ -91,6 +91,11 @@ namespace Console_User
 
             switch(input)
             {
+                case "0": //Close program
+                    Environment.Exit(0);
+
+                    break;
+
                 case "1": //Nearest Parking Place
                     Console.WriteLine("Here is the nearest parking place: ");
                     server_message = "Get Neareest Parking Place" + splitter;
@@ -212,11 +217,6 @@ namespace Console_User
                     send_message.NewTask(args);
 
                     receive_message.ReceiveMessage(args);
-                    break;
-
-                case "8": //Close program
-                    Environment.Exit(0);
-
                     break;
 
                 default: //default case
