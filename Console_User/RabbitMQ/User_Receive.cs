@@ -29,7 +29,7 @@ namespace Console_User.RabbitMQ
             this.host_name = "localhost - user";
             this.user = "guest";
             this.password = "guest";
-            this.virtuel_host = "??????????";
+            this.virtuel_host = "/";
             this.exchange = "direct_logs";
             this.type = type;
             this.autoAck = true;

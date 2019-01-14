@@ -34,7 +34,7 @@ namespace Console_User.RabbitMQ
             this.host_name = "localhost - tasks";
             this.user = "guest";
             this.password = "guest";
-            this.virtuel_host = "??????????";
+            this.virtuel_host = "/";
             this.queue = "task_queue";
             this.durable = true;
             this.exclusive = false;
