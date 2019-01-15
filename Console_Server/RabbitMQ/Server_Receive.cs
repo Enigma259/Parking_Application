@@ -535,7 +535,7 @@ namespace Console_Server.RabbitMQ
             Console.WriteLine("executing task: Get Average Number");
 
             Server_Send send_result;
-            int average = stats.GetAverage();
+            double average = stats.GetAverage();
 
             string result = "Get Average Number" + "$$$" + average;
 

@@ -57,7 +57,7 @@ namespace Console_Server.Control
         /// This method gets the time for average.
         /// </summary>
         /// <returns>int</returns>
-        public int GetTimeForAverage()
+        public double GetTimeForAverage()
         {
             return p_stats.GetTimeForAverage();
         }
@@ -75,7 +75,7 @@ namespace Console_Server.Control
         /// This method gets the average number.
         /// </summary>
         /// <returns>int</returns>
-        public int GetAverage()
+        public double GetAverage()
         {
             return p_stats.GetAverage();
         }

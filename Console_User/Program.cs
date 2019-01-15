@@ -7,6 +7,7 @@ using Console_User.Control;
 using Console_User.RabbitMQ;
 using Console_Server.Control;
 using Console_Server.Database;
+using Console_User.Test;
 
 namespace Console_User
 {
@@ -265,6 +266,11 @@ namespace Console_User
                     delete_result = reservation.Delete(delete_id, delete_id_type);
 
                     Console.WriteLine("reservation status: " + delete_result);
+                    break;
+
+                case "Test NPP":
+                    Test_Parking park = new Test_Parking(user.GetUser().GetName(), user.GetUser().GetEmail(), user.GetUser().GetMobile(), user.GetUser().GetPlateNumber());
+                    Console.WriteLine(park.TestNearestParking());
                     break;
 
                 default: //default case
