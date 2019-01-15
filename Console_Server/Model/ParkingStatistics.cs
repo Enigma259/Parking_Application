@@ -126,7 +126,7 @@ namespace Console_Server.Model
         public void SetAverage()
         {
             CheckAverages();
-            this.average = GetAverages().Count;
+            this.average = GetAverages().Count / GetTimeForAverage();
         }
 
         /// <summary>

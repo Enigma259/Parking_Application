@@ -17,6 +17,7 @@ namespace Console_Server.Control
 
         private Reservation reservation;
         private CTR_Parking ctr_parking;
+        private CTR_ParkingStatistics stats;
 
         /// <summary>
         /// This is the constructor for the class CTR_Reservation.
@@ -25,6 +26,7 @@ namespace Console_Server.Control
         {
             this.reservation = Reservation.GetInstance();
             this.ctr_parking = new CTR_Parking();
+            this.stats = CTR_ParkingStatistics.GetInstance();
         }
 
         /// <summary>
@@ -57,6 +59,7 @@ namespace Console_Server.Control
         /// <returns>string</returns>
         public string Create(string plate_number, DateTime start, DateTime end, int parking_id)
         {
+            stats.NewRequest();
             string result;
             TableParkingPlace parking = ctr_parking.FindById(parking_id);
 
@@ -89,6 +92,7 @@ namespace Console_Server.Control
         /// <returns>List<TableReservation></returns>
         public List<TableReservation> ListAll()
         {
+            stats.NewRequest();
             return reservation.ListAllReservations();
         }
 
@@ -99,6 +103,7 @@ namespace Console_Server.Control
         /// <returns>TableReservation</returns>
         public TableReservation FindById(int id)
         {
+            stats.NewRequest();
             return reservation.FindReservationById(id);
         }
 
@@ -109,6 +114,7 @@ namespace Console_Server.Control
         /// <returns>List<TableReservation></returns>
         public List<TableReservation> FindByPlateNumber(string plate_number)
         {
+            stats.NewRequest();
             return reservation.FindReservationByPlateNumber(plate_number);
         }
 
@@ -119,6 +125,7 @@ namespace Console_Server.Control
         /// <returns>List<TableReservation></returns>
         public List<TableReservation> FindByStart(DateTime start, string when)
         {
+            stats.NewRequest();
             List<TableReservation> result;
 
             if(when.Equals("Here"))
@@ -151,6 +158,7 @@ namespace Console_Server.Control
         /// <returns>List<TableReservation></returns>
         public List<TableReservation> FindByEnd(DateTime end, string when)
         {
+            stats.NewRequest();
             List<TableReservation> result;
 
             if (when.Equals("Here"))
@@ -183,6 +191,7 @@ namespace Console_Server.Control
         /// <returns>List<TableReservation></returns>
         public List<TableReservation> FindByParkingId(int parking_id)
         {
+            stats.NewRequest();
             return reservation.FindReservationByParkingId(parking_id);
         }
 
@@ -197,6 +206,7 @@ namespace Console_Server.Control
         /// <returns>string</returns>
         public string Update(int id, string plate_number, DateTime start, DateTime end, int parking_id)
         {
+            stats.NewRequest();
             string result;
             TableParkingPlace parking = ctr_parking.FindById(parking_id);
 
@@ -239,6 +249,7 @@ namespace Console_Server.Control
         /// <returns>string</returns>
         public string Delete(int id, string what)
         {
+            stats.NewRequest();
             string result;
             int parking_id = -5;
 
@@ -285,6 +296,7 @@ namespace Console_Server.Control
         /// <returns>string</returns>
         public string ActiveReservations(int parking_id)
         {
+            stats.NewRequest();
             string result;
             TableParkingPlace parking;
             int active_reservations;

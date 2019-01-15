@@ -13,6 +13,7 @@ namespace Console_Server.Control
     public class CTR_Parking
     {
         private Parking parking;
+        private CTR_ParkingStatistics stats;
 
         /// <summary>
         /// This is the constructor for the class CTR_Parking.
@@ -20,6 +21,7 @@ namespace Console_Server.Control
         public CTR_Parking()
         {
             this.parking = Parking.GetInstance();
+            this.stats = CTR_ParkingStatistics.GetInstance();
         }
 
         /// <summary>
@@ -36,6 +38,7 @@ namespace Console_Server.Control
         /// <returns>string</returns>
         public string Create(double longtitude, double latitude, double altitude, string parking_name, int spaces, int vacant, string city, string country)
         {
+            stats.NewRequest();
             return parking.CreateParking(longtitude, latitude, altitude, parking_name, spaces, vacant, city, country);
         }
 
@@ -45,6 +48,7 @@ namespace Console_Server.Control
         /// <returns>List<TableParkingPlace></returns>
         public List<TableParkingPlace> ListAll()
         {
+            stats.NewRequest();
             return parking.ListAllParkings();
         }
 
@@ -55,6 +59,7 @@ namespace Console_Server.Control
         /// <returns>TableParkingPlace</returns>
         public TableParkingPlace FindById(int id)
         {
+            stats.NewRequest();
             return parking.FindParkingByid(id);
         }
 
@@ -67,6 +72,7 @@ namespace Console_Server.Control
         /// <returns>List<TableParkingPlace></returns>
         public List<TableParkingPlace> FindByLocation(double longtitude, double latitude, double altitude)
         {
+            stats.NewRequest();
             return parking.FindParkingByLocation(longtitude, latitude, altitude);
         }
 
@@ -79,6 +85,7 @@ namespace Console_Server.Control
         /// <returns>TableParkingPlace</returns>
         public TableParkingPlace FindNearest(double longtitude, double latitude, double altitude)
         {
+            stats.NewRequest();
             return parking.FindNearestParking(longtitude, latitude, altitude);
         }
 
@@ -89,6 +96,7 @@ namespace Console_Server.Control
         /// <returns>List<TableParkingPlace></returns>
         public List<TableParkingPlace> FindByName(string parking_name)
         {
+            stats.NewRequest();
             return parking.FindParkingByParkingName(parking_name);
         }
 
@@ -100,6 +108,7 @@ namespace Console_Server.Control
         /// <returns>List<TableParkingPlace></returns>
         public List<TableParkingPlace> FindBySpaces(int spaces, string where)
         {
+            stats.NewRequest();
             List<TableParkingPlace> result;
 
             if (where.Equals("Here"))
@@ -133,6 +142,7 @@ namespace Console_Server.Control
         /// <returns>List<TableParkingPlace></returns>
         public List<TableParkingPlace> FindByVacant(int vacant, string where)
         {
+            stats.NewRequest();
             List<TableParkingPlace> result;
 
             if (where.Equals("Here"))
@@ -165,6 +175,7 @@ namespace Console_Server.Control
         /// <returns>List<TableParkingPlace></returns>
         public List<TableParkingPlace> FindByCity(string city)
         {
+            stats.NewRequest();
             return parking.FindParkingByCity(city);
         }
 
@@ -175,6 +186,7 @@ namespace Console_Server.Control
         /// <returns>List<TableParkingPlace></returns>
         public List<TableParkingPlace> FindByCountry(string country)
         {
+            stats.NewRequest();
             return parking.FindParkingByCountry(country);
         }
 
@@ -193,6 +205,7 @@ namespace Console_Server.Control
         /// <returns>string</returns>
         public string Update(int id, double longtitude, double latitude, double altitude, string parking_name, int spaces, int vacant, string city, string country)
         {
+            stats.NewRequest();
             return parking.UpdateParking(id, longtitude, latitude, altitude, parking_name, spaces, vacant, city, country);
         }
 
@@ -203,6 +216,7 @@ namespace Console_Server.Control
         /// <returns>string</returns>
         public string Delete(int id)
         {
+            stats.NewRequest();
             return parking.DeleteParking(id);
         }
     }

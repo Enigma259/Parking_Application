@@ -15,6 +15,7 @@ namespace Console_Server.Control
         private static readonly object syncRoot = new object();
 
         private Location location;
+        private CTR_ParkingStatistics stats;
 
         /// <summary>
         /// This is the constructor for the class CTR_Location.
@@ -22,6 +23,7 @@ namespace Console_Server.Control
         private CTR_Location()
         {
             this.location = new Location();
+            this.stats = CTR_ParkingStatistics.GetInstance();
         }
 
         /// <summary>
@@ -50,6 +52,7 @@ namespace Console_Server.Control
         /// <returns>double</returns>
         public double GetLongtitude()
         {
+            stats.NewRequest();
             return location.GetLongtitude();
         }
 
@@ -59,6 +62,7 @@ namespace Console_Server.Control
         /// <returns>double</returns>
         public double GetLatitude()
         {
+            stats.NewRequest();
             return location.GetLatitude();
         }
 
@@ -68,6 +72,7 @@ namespace Console_Server.Control
         /// <returns>double</returns>
         public double GetAltitude()
         {
+            stats.NewRequest();
             return location.GetAltitude();
         }
 
@@ -77,6 +82,7 @@ namespace Console_Server.Control
         /// <returns>string</returns>
         public string SetLocation()
         {
+            stats.NewRequest();
             return location.SetLocation();  
         }
     }
