@@ -14,9 +14,9 @@ namespace Console_Server.Model
         private int request_number;
 
         //time for average is in seconds.
-        private int time_for_average;
+        private double time_for_average;
         private List<DateTime> averages;
-        private int average;
+        private double average;
 
         /// <summary>
         /// This is the constructor for the class ParkingStatistics.
@@ -62,7 +62,7 @@ namespace Console_Server.Model
         /// This method returns tha value in the instance time_for_average.
         /// </summary>
         /// <returns>int</returns>
-        public int GetTimeForAverage()
+        public double GetTimeForAverage()
         {
             return time_for_average;
         }
@@ -80,7 +80,7 @@ namespace Console_Server.Model
         /// This method returns tha value in the instance average.
         /// </summary>
         /// <returns>int</returns>
-        public int GetAverage()
+        public double GetAverage()
         {
             return average;
         }
@@ -134,9 +134,11 @@ namespace Console_Server.Model
         /// </summary>
         private void CheckAverages()
         {
+            int seconds = Convert.ToInt32(Math.Round(GetTimeForAverage()));
+
             int index = 0;
             DateTime current;
-            DateTime outdate_limit = DateTime.Now.Subtract(InsertSecondsToTimeSpan(GetTimeForAverage()));
+            DateTime outdate_limit = DateTime.Now.Subtract(InsertSecondsToTimeSpan(seconds));
 
             while (index < GetAverages().Count)
             {
